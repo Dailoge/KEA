@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_3</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('a.file').on('change', "input[type='file']", function () {
+                var id = $(this).attr('id');
+                if (id == 'file1') {
+                    $('#inputFile1').val($(this).val());
+                } else if (id == 'file2') {
+                    $('#inputFile2').val($(this).val());
+                }
+            });
+            $(function () {
+                $('#eventType > ul > li ').click(function () {
+                    $(this).next('ul').toggle();
+                });
+            });
+            //getData();
+            var data = $("form").serialize();
+            var page3 = JSON.parse(localStorage.getItem('page3'));
+            if (page3 == null) {
+                page3 = [];
+                // layerShow();
+            } else {
+                page3.forEach(function (item, index) {
+                    for (var i in item) {
+                        if (item[i] === null)
+                            continue;
+                        item[i] = item[i].replace(/\+/g, " ");
+                    }
+                    var flag = false;
+                    for (var i in item) {
+                        if (item.hasOwnProperty('region')) {
+                            $('select[name=region]').val(item['region']);
+                            $('select[name=country]').val(item['country']);
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        // layerShow();
+                    }
+                });
+            }
+            $('#bottom-button button').click(function () {
+                var data = $("form").serialize();
+                var array = data.split('&');
+                var object = {};
+                array.forEach(function (item, index, array) {
+                    var posi = item.indexOf('=');
+                    if (posi < item.length - 1) {
+                        var left = item.slice(0, posi);
+                        var right = item.slice(posi + 1, item.length);
+                        //console.log(left + " " + right);
+                        object[left] = escape(right);
+                    }
+                });
+                object['createTime'] = getTime();
+                console.log(object);
+                page3.push(object);
+                localStorage.setItem('page3', JSON.stringify(page3));
+            });
+        });
+    </script>
+    <style type="text/css">
+        #first p, #second p, #three p {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        #eventType {
+            background: #2f323d;
+            border: 3px solid #3b3e4b;
+            border-radius: 3px;
+            padding-top: 10px;
+            padding-bottom: 50px;
+            height: 330px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #eventType > ul > li {
+            background: url('./static/img/ten.png') no-repeat left;
+            padding-left: 45px;
+            margin-bottom: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        #eventType ul li ul {
+
+        }
+
+        #eventType ul ul li {
+            padding-left: 28px;
+        }
+
+        #eventType ul ul li input {
+            margin-right: 5px;
+        }
+
+        .layer-border {
+            border: 1px solid #1C8EC3;
+            border-radius: 5px;
+        }
+
+        .layui-layer-title {
+            background: #1C8EC3;
+            color: #fff;
+            border-bottom: 0px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .layui-layer-content, .layui-layer-btn.layui-layer-btn-c {
+            background: #121929;
+            padding: 20px 30px 20px 0px;
+        }
+
+        .layui-layer-content label.control-label {
+            color: #fff;
+            text-align: right;
+            padding: 7px 0px 0px 0px;
+        }
+
+        .layui-layer-content .auth-select {
+            background: #2f323d;
+            border: 3px solid #3b3e4b;
+            border-radius: 3px;
+            height: 170px;
+            padding: 5px 10px
+        }
+
+        .auth-select li label {
+            color: #fff;
+            font-weight: normal;
+        }
+
+        .auth-select li input {
+            margin-right: 5px
+        }
+    </style>
+    <script type="text/javascript">
+        function layerShow() {
+            layer.open({
+                title: 'Authority management',
+                type: 1,
+                closeBtn: 0,
+                btnAlign: 'c',
+                btn: ['Finish ', 'Cancel'],
+                btn1: function (index, layero) {
+                    var regionIndex = document.getElementsByName('region-layer')[0].selectedIndex;
+                    var countryIndex = document.getElementsByName('country-layer')[0].selectedIndex;
+                    document.getElementsByName('region')[0].selectedIndex = regionIndex;
+                    document.getElementsByName('country')[0].selectedIndex = countryIndex;
+                    layer.close(index);
+                },
+                btn2: function (index, layero) {
+                    layer.close(index);
+                },
+                skin: 'layer-border', //加上边框
+                area: ['800px', '400px'], //宽高
+                content: '<div class="input-group">' +
+                '<div class="form-group col-lg-6">\n' +
+                '  <label class="control-label col-lg-4" for="">Region:</label>\n' +
+                '  <div class="col-lg-8">\n' +
+                '    <select class="form-control" name="region-layer">\n' +
+                '      <option>Americe Rep Office</option>\n' +
+                '      <option>Americe Rep Office2</option>\n' +
+                '      <option>Americe Rep Office3</option>\n' +
+                '    </select>\n' +
+                '  </div>\n' +
+                '</div>\n' +
+                '<div class="form-group col-lg-6">\n' +
+                '  <label class="control-label col-lg-4" for="">Country:</label>\n' +
+                '  <div class="col-lg-8">\n' +
+                '    <select class="form-control" name="country-layer">\n' +
+                '      <option>United States</option>\n' +
+                '      <option>United States2</option>\n' +
+                '      <option>United States3</option>\n' +
+                '    </select>\n' +
+                '  </div>\n' +
+                '</div>' +
+                '<div class="form-group col-lg-6">\n' +
+                '  <label class="control-label col-lg-4" for="">Permission:</label>\n' +
+                '  <div class="col-lg-8">\n' + '<div class="auth-select"\n' +
+                '<ul>\n' +
+                '<li><label><input type="checkbox" name="layer-permission" value="dataupload" checked="checked">Data upload (default)</label></li>\n' +
+                '<li><label><input type="checkbox" name="layer-permission" value="ntm">National traffic model</label></li>\n' +
+                '<li><label><input type="checkbox" name="layer-permission" value="gtm">Global traffic model</label></li>\n' +
+                '<li><label><input type="checkbox" name="layer-permission" value="tfce">Traffic forecast & capacity evaluation</label></li>\n' +
+                '</ul>\n' +
+                '</div>\n' +
+                '</div>\n' +
+                '</div>\n' +
+                '<div class="form-group col-lg-6">\n' +
+                '  <label class="control-label col-lg-4" for="">Permission Time:</label>\n' +
+                '  <div class="col-lg-5">\n' +
+                '    <input type="text" name="file2" id="inputFile2" class="form-control" value="">\n' +
+                '  </div>' +
+                '<div class="col-lg-1"><label class="control-label" style="color:#fff;margin-left: -20px"> days</label></div>' +
+                '</div></div>'
+                // '<div class="text-center"><button class="btn btn-primary">Finish</button>' +
+                // '<button class="btn btn-primary">Cancel</button></div>'
+            });
+        }
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent">
+        <div class="kea_menu">
+            <ul>
+                <li onclick="window.location.href='page_4.html'">Traffic Forecast and Capacity Audit</li>
+                <li class="menu_active">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress">
+                <div class="kea_progress_bg" style="padding:0px 15px">
+                    <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                        <div class="container-fluid" id="first" style="margin-top: 0px;">
+                            <p>Data File Path Setting</p>
+                            <div class="row" style="padding: 30px 0;">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label text-center" for="inputFile1">KEA File:</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" name="file1" id="inputFile1" class="form-control" value="">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a href="javascript:;" class="file">. . .<input type="file" id="file1"
+                                                                                        name="file11"></a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label text-center" for="inputFile2">Authority
+                                        File:</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" name="file2" id="inputFile2" class="form-control" value="">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a href="javascript:;" class="file">. . .<input type="file" id="file2"
+                                                                                        name="file22"
+                                                                                        accept="text/plain,application/pdf"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid" id="second">
+                            <p>Operator Information</p>
+                            <div class="row" style="margin: 15px auto;">
+                                <div class="form-group col-lg-4">
+                                    <label class="control-label col-lg-4" for="">Region:</label>
+                                    <div class="col-lg-8">
+                                        <select class="form-control" name="region">
+                                            <option>Americe Rep Office</option>
+                                            <option>Americe Rep Office2</option>
+                                            <option>Americe Rep Office3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label class="control-label col-lg-4" for="">Country:</label>
+                                    <div class="col-lg-8">
+                                        <select class="form-control" name="country">
+                                            <option>United States</option>
+                                            <option>United States2</option>
+                                            <option>United States3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label class="control-label col-lg-4" for="">Operator:</label>
+                                    <div class="col-lg-8">
+                                        <select class="form-control" name="operator">
+                                            <option>AM(American Movil)</option>
+                                            <option>AM(American Movil)2</option>
+                                            <option>AM(American Movil)3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid" id="three">
+                            <p>Project Information</p>
+                            <div class="row" style="padding: 15px 0px;padding-bottom: 70px;">
+                                <div class="col-lg-4">
+                                    <label class="col-lg-4 control-label">Event Type:</label>
+                                    <div class="col-lg-8 scroll" id="eventType">
+                                        <ul>
+                                            <li>Sports Category</li>
+                                            <ul class="none">
+                                                <li><label><input type="checkbox" name="eventType1" value="football">football</label>
+                                                </li>
+                                                <li><label><input type="checkbox" name="eventType1" value="Basketball">Basketball</label>
+                                                </li>
+                                                <li><label><input type="checkbox" name="eventType1" value="Badminton">Badminton</label>
+                                                </li>
+                                            </ul>
+                                            <li>Festival Category</li>
+                                            <ul class="none">
+                                                <li><label><input type="checkbox" name="eventType2" value="football">football</label>
+                                                </li>
+                                                <li><label><input type="checkbox" name="eventType2" value="Basketball">Basketball</label>
+                                                </li>
+                                                <li><label><input type="checkbox" name="eventType2" value="Badminton">Badminton</label>
+                                                </li>
+                                            </ul>
+                                            <li>Exhibition/Meeting Events Category</li>
+                                            <ul class="none">
+                                                <li><label><input type="checkbox" name="eventType3" value="football">football</label>
+                                                </li>
+                                                <li><label><input type="checkbox" name="eventType3" value="Basketball">Basketball</label>
+                                                </li>
+                                                <li><label><input type="checkbox" name="eventType3" value="Badminton">Badminton</label>
+                                                </li>
+                                            </ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="row" style="margin-bottom: 20px;">
+                                        <label class="control-label col-lg-4" for="">Project Name:</label>
+                                        <div class="col-lg-8"><input type="text" class="form-control"
+                                                                     name="projectName"></div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label col-lg-4" for="">Wireless Level:</label>
+                                        <div class="col-lg-8">
+                                            <select class="form-control" name="wirelessLevel">
+                                                <option>UMTS</option>
+                                                <option>LTE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="text-right" id="bottom-button">
+            <a href="page_10.html">
+                <button class="btn btn-primary" id="submit">Next</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+<script src="static/js/regions.js"></script>
+</body>
+</html>

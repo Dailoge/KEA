@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_8</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <script type="text/javascript" src="./static/js/echarts.common.min.js"></script>
+    <style type="text/css">
+        table {
+            border-color: #3b3e4b !important;
+            width: 2000px !important;
+            max-width: 2000px !important;
+        }
+
+        #content table tr:nth-child(1) {
+            background: #1d2d51;
+        }
+
+        td {
+            border-top: 1px solid #3b3e4b !important;
+        }
+
+        #content {
+            height: 360px;
+            overflow: auto;
+            padding-top: 0px;
+        }
+
+        #chartIcrease {
+            width: 2000px;
+            height: 290px;
+        }
+
+        .form-control {
+            height: 20px !important;
+            padding: 1px 3px !important;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var increaseFactor = JSON.parse(localStorage.getItem('increaseFactor'));
+            var data1=[];
+            var date = "2017-12-07"; //localstorage
+            var minutes = 30;
+            var starthour = 13, endhour = 23;
+            var hourarr = getTimeArr(starthour, endhour, minutes);
+            var initialData = [2.58,6.5919,0,0.7114,1.721,0,0,0,0,1.911,0,2.2002,0.166,1.8071,1.6174,1.4159,0.6416,
+                0.6519,0.7416,0.6241,0.7101,1.1607,1.4105,1.0071,1.171,1.0251,0.9504,0.7478,1.5085,1.8111,1.5304,
+                1.2751,1.2261,1.0141,0.7924,0.6723,0.4063,0.4053];
+            var time=['13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30']
+            if(increaseFactor==null){
+                for(var j=0;j<time.length;j++){
+                    var tmp = [];
+                    tmp.push(time[j]);
+                    for (var i=0;i<10;i++){
+                        tmp.push(initialData[parseInt(Math.random() * initialData.length)]);
+                    }
+                    //console.log(tmp);
+                    data1.push(tmp);
+                } 
+            }
+            var data = increaseFactor || data1;
+            data.forEach(function (item, index, array) {
+                var tr = document.createElement('tr');
+                tr.className = 'notFirst';
+                for (var i in item) {
+                    var td = document.createElement('td');
+                    var input = document.createElement('input');
+                    input.className = 'form-control';
+                    input.type = 'text';
+                    input.value = item[i];
+                    input.name = 1;
+                    if (i == 'a') {
+                        input.disabled = true;
+                    }
+                    td.appendChild(input);
+                    tr.appendChild(td);
+                }
+                $('#content table').append(tr);
+            });
+            shiying();
+            $('#bottom-button button').click(function () {
+                var increaseFactor = [];
+                var factorName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'm', 'x', 'y', 'z'];
+                var allTr = $('table tr').not(':first');
+                for (var i = 0; i < allTr.length; i++) {
+                    var trInput = $(allTr[i]).find('input');
+                    var object = {};
+                    for (var j = 0; j < trInput.length; j++) {
+                        object[factorName[j]] = $(trInput[j]).val();
+                        //console.log($(trInput[j]).val());
+                    }
+                    increaseFactor.push(object);
+                }
+                console.log(increaseFactor)
+                localStorage.setItem('increaseFactor', JSON.stringify(increaseFactor));
+                var time=getTime();
+                localStorage.setItem('createTime',time.toString());
+            });
+            var option2 = {
+                grid: {
+                    left: '0.5%',
+                    bottom: '0%',
+                },
+                legend: {
+                    data: [],
+                },
+                xAxis: [
+                    {
+                        data: [],
+                    }
+                ],
+                series: [
+                    {
+                        name: '',
+                        data: []
+                    }
+                ]
+            };
+            var $data = $('#four table');
+            var data_x = [];
+            var data_y = [];
+            for (var i = 0; i < $data.find('tr').length - 1; i++) {
+                var item = $data.find('tr').eq(i + 1).find('td').eq(0).find('[type=text]').val();
+                data_x.push(item);
+            }
+            for (var i = 0; i < $data.find('tr').length - 1; i++) {
+                var item = $data.find('tr').eq(i + 1).find('td').eq(1).find('[type=text]').val();
+                data_y.push(item);
+            }
+            option2.xAxis[0].data = data_x;
+            option2.series[0].name = 'Traffic CS Forecast Factor';
+            option2.series[0].data = data_y;
+            chartById('chartIcrease', option2, 1);
+            $('ul.chart-list li').click(function () {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+                var num = $(this).index();
+                var name = $data.find('tr').eq(0).find('td').eq(num + 1).text();
+                var data_y = [];
+                for (var i = 0; i < $data.find('tr').length - 1; i++) {
+                    var item = $data.find('tr').eq(i + 1).find('td').eq(num + 1).find('[type=text]').val();
+                    data_y.push(item);
+                }
+                option2.series[0].name = name;
+                option2.series[0].data = data_y;
+                chartById('chartIcrease', option2, 1);
+            });
+            var inputChange = function () {
+                var parent = $(this).parent('td');
+                var num = parent.index();
+                var name = $data.find('tr').eq(0).find('td').eq(num).text();
+                var data_y = [];
+                for (var i = 0; i < $data.find('tr').length - 1; i++) {
+                    var item = $data.find('tr').eq(i + 1).find('td').eq(num).find('[type=text]').val();
+                    data_y.push(item);
+                }
+                option2.series[0].name = name;
+                option2.series[0].data = data_y;
+                $('#four ul li').eq(num - 1).addClass('active').siblings().removeClass('active');
+                chartById('chartIcrease', option2, 1);
+            }
+            $('#four table tr:gt(0) td input').bind('focus keyup', inputChange);
+        });
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent" id="shiying">
+        <div class="kea_menu">
+            <ul>
+                <li class="menu_active">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid">
+                        <div id="four" style="margin-top: 0px">
+                            <p>Non-hotpot Increase Factor</p>
+                            <div class="container-fluid scroll" id="content">
+                                <table class="table">
+                                    <tr>
+                                        <td>Time</td>
+                                        <td>Traffic CS Forecast Factor</td>
+                                        <td>Traffic R99 DL Forecast Factor</td>
+                                        <td>Traffic R99 UL Forecast Factor</td>
+                                        <td>Traffic HSDPA Forecast Factor</td>
+                                        <td>Traffic HSUPA Forecast Factor</td>
+                                        <td>RRC User Forecast Factor</td>
+                                        <td>AMR User Forecast Factor</td>
+                                        <td>R99 DL User Forecast Factor</td>
+                                        <td>HSDPA User Forecast Factor</td>
+                                        <td>DCH Forecast Factor</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="second">
+                            <p>The Chart Showing Icrease Factor Tendency</p>
+                            <ul class="clearfix chart-list">
+                                <li class="active">Traffic CS Forecast Factor</li>
+                                <li>Traffic R99 DL Forecast Factor</li>
+                                <li>Traffic R99 UL Forecast Factor</li>
+                                <li>Traffic HSDPA Forecast Factor</li>
+                                <li>Traffic HSUPA Forecast Factor</li>
+                                <li>RRC User Forecast Factor</li>
+                                <li>AMR User Forecast Factor</li>
+                                <li>R99 DL User Forecast Factor</li>
+                                <li>HSDPA User Forecast Factor</li>
+                                <li>DCH Forecast Factor</li>
+                            </ul>
+                            <div class="scroll">
+                                <div id="chartIcrease"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="page_9.html">
+                <button class="btn btn-primary">Next</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+</body>
+</html>

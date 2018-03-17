@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/echarts.common.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <style type="text/css">
+        #second {
+            border-color: #de9200;
+        }
+
+        #bottom-button button {
+            width: 200px;
+        }
+
+        #second {
+            border-color: #de9200;
+        }
+
+        #second p {
+            background: #de9200;
+        }
+
+        .form-horizontal .control-label {
+            padding-top: 0px !important;
+        }
+
+        #second ul li {
+            float: left;
+            list-style: none;
+            width: 150px;
+        }
+
+        #second ul li:first-child {
+            border-right: 1px solid #fff;
+        }
+
+        .bg img {
+            width: 100%;
+            height: 100%;
+        }
+
+        table {
+            border-width: 0px !important;
+        }
+
+        #content table tr:nth-child(1) {
+            background: #1d2d51;
+        }
+
+        td {
+            border-bottom: 2px solid #3b3e4b !important;
+            border-top: 0px !important;
+            padding: 8px !important;
+            font-weight: bold;
+        }
+
+        .contain {
+            border: 2px solid #3b3e4b;
+            height: 340px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent">
+        <div class="kea_menu">
+            <ul>
+                <li onclick="window.location.href='page_4.html'">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li class="menu_active">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid">
+                        <div id="second" style=" overflow: auto">
+                            <p>The Chart Showing Increase Factor Tendency</p>
+                            <ul class="clearfix">
+                                <li>
+                                    <select class="operator-select" value="RF_TCP">
+                                        <option>RF_TCP</option>
+                                        <option>RF_TCP1</option>
+                                        <option>RF_TCP2</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <select class="operator-select" value="Call HSDPA UE">
+                                        <option>CS AMR UE</option>
+                                        <option>CS AMR UE1</option>
+                                        <option>CS AMR UE2</option>
+                                    </select>
+                                </li>
+                            </ul>
+                            <div class="scroll">
+                                <div style="height: 400px;width: 2500px" id="operatorChart"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="">
+                <button class="btn btn-primary">Privilege Apply</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+<script type="text/javascript">
+    var option1 = {
+        legend: {
+            show: false,
+            data: ['RF_TCP', 'CS AMR UE'],
+        },
+        xAxis: [
+            {
+                data: getTimeArr(0, 24, 30)
+            }
+        ],
+        series: [
+            {
+                name: 'RF_TCP',
+                data: []
+            },
+            {
+                name: 'CS AMR UE',
+                data: []
+            },
+        ]
+    };
+    var x_data = [200, 320, 500, 440, 600, 200, 300, 500, 600, 900, 500, 300, 500, 600, 800, 500, 200, 500, 300, 400];
+    var x_data1 = [200, 120, 110, 340, 200, 330, 300, 500, 600, 800, 500, 300, 500, 600, 800, 500, 200, 500, 500, 623];
+    for (var i = 0; i < 49; i++) {
+        x_data[i] = Math.random() * 900;
+    }
+    for (var i = 0; i < 49; i++) {
+        x_data1[i] = Math.random() * 900;
+    }
+    option1.series[0].data = x_data;
+    option1.series[1].data = x_data1;
+    chartById('operatorChart', option1);
+    $('#second ul li select').change(function () {
+        var value = $(this).val();
+        for (var i = 0; i < 49; i++) {
+            x_data[i] = Math.random() * 900;
+        }
+        for (var i = 0; i < 49; i++) {
+            x_data1[i] = Math.random() * 900;
+        }
+        option1.series[0].data = x_data;
+        option1.series[1].data = x_data1;
+        chartById('operatorChart', option1)
+    });
+</script>
+</body>
+</html>

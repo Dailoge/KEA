@@ -1,0 +1,138 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+.flex{
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+@keyframes rotation{
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(360deg);}
+}
+@-webkit-keyframes rotation{
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotation{
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(360deg);}
+}
+@-o-keyframes rotation{
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(360deg);}
+}
+.Rotation{
+-webkit-transform: rotate(360deg);
+animation: rotation 3s linear infinite;
+-moz-animation: rotation 3s linear infinite;
+-webkit-animation: rotation 3s linear infinite;
+-o-animation: rotation 3s linear infinite;
+}
+@keyframes rotation_a{
+from {-webkit-transform: rotate(360deg);}
+to {-webkit-transform: rotate(0deg);}
+}
+@-webkit-keyframes rotation_a{
+from {-webkit-transform: rotate(360deg);}
+to {-webkit-transform: rotate(0deg);}
+}
+@-moz-keyframes rotation_a{
+from {-webkit-transform: rotate(360deg);}
+to {-webkit-transform: rotate(0deg);}
+}
+@-o-keyframes rotation_a{
+from {-webkit-transform: rotate(360deg);}
+to {-webkit-transform: rotate(0deg);}
+}
+.Rotation_a{
+-webkit-transform: rotate(360deg);
+animation: rotation 2s linear infinite;
+-moz-animation: rotation 2s linear infinite;
+-webkit-animation: rotation 2s linear infinite;
+-o-animation: rotation 2s linear infinite;
+}
+.animation{
+    position: relative;
+    margin: 0 auto;
+    background: url("../img/3g-1.png") no-repeat  50% 50%;
+    background-size:cover;
+    width: 1588px;
+    height: 335px;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flex1, .flex2, .flex3 .flex4{
+    height:156px;
+    width:156px;
+    background-size:149px 149px;
+    background: transparent;
+}
+/*3G 4G*/
+.flex1 {
+    margin-left: 69px;
+    margin-top: 80px;
+}
+/*3G Cluster Level Forecast*/
+.flex2 {
+    margin-left: 182px;
+    margin-top: 19px;
+}
+/*3G RNC Level Forecast*/
+.flex3 {
+    margin-left: 177px;
+    margin-top: 29px;
+}
+/*3G Capacity Audit*/
+.flex4 {
+    margin-left: 183px;
+    margin-top: 29px
+}
+/*3G Download*/
+.flex5 {
+    margin-left:178px;
+    margin-top: 96px;
+}
+/*4G Cluster Level Forecast*/
+.flex6 {
+    margin-left: 197px;
+    margin-top: 163px;
+}
+/*4G Capacity Audit*/
+.flex7 {
+    margin-left: 501px;
+    margin-top: 164px;
+}
+/*4G Download*/
+.flex8 {
+    margin-left: 178px;
+    margin-top: -17px;
+}
+.flex1_2{
+    /*height:131px;*/
+    /*width:131px;*/
+    height: 126px;
+    width: 126px;
+    background: url("../img/animation/flex1_2.png") no-repeat  50% 50%;
+    background-size:126px 126px;
+}
+.flex1_3{
+    /*height:105px;*/
+    /*width:105px;*/
+    height: 101px;
+    width: 101px;
+    background: url("../img/animation/flex1_3.png") no-repeat  50% 50%;
+    background-size:101px 101px;
+}
+.flex1_txt{
+    position: absolute;
+    color: red;
+}
+.small-animation {
+    background-size: 99px 99px;
+    margin-bottom: 10px
+}

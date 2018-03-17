@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_9</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <link rel="stylesheet" href="./static/style/animation.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <script src="./static/js/layer-message.js"></script>
+    <style type="text/css">
+        .bg {
+            height: 348px;
+        }
+
+        .bg img {
+            width: 100%;
+            height: 100%;
+        }
+
+        table {
+            border-width: 0px !important;
+        }
+
+        #content table tr:nth-child(1) {
+            background: #1d2d51;
+        }
+
+        td {
+            border-bottom: 2px solid #3b3e4b !important;
+            border-top: 0px !important;
+            padding: 8px !important;
+            font-weight: bold;
+        }
+        td a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .contain {
+            border: 2px solid #3b3e4b;
+            height: 200px;
+            overflow: auto;
+        }
+
+        .animation {
+            background: url("./static/img/3g-4.png") no-repeat 50% 50%;
+            background-size: cover;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var object = getData();
+            var createTime=localStorage.getItem('createTime');
+            if(createTime!=null){
+                if(judgeTime(createTime,5)){
+                    object['status']='Success';
+                }
+            }
+            var operator = decodeURIComponent(object['operator']);
+            var data = [
+                {
+                    b: object['taskType'] || 'Cluster Forecast',
+                    c: object['wirelessLevel'] || 'UMTS',
+                    d: object['projectName'] || 'projectname',
+                    f: createTime||'2017-12-25',
+                    i: object['status'] || 'Waiting',
+                    k: '<a href="javascript:;">Edit</a>'
+                },
+            ];
+            data.forEach(function (item, index, array) {
+                var tr = document.createElement('tr');
+                for (var i in item) {
+                    var td = document.createElement('td');
+                    td.innerHTML = item[i];
+                    tr.appendChild(td);
+                }
+                $('#content table').append(tr);
+            });
+            shiying();
+            $('#bottom-button button').click(function(){
+                var page3=JSON.parse(localStorage.getItem('page3'));
+                var username=localStorage.getItem('username');
+                if(page3==null){
+                    page3=[];
+                }
+                var flag=true;
+                page3.forEach(function(item,index){
+                    for(var i in item){
+                        if(item.hasOwnProperty('projectName')){
+                            if(item['projectName']==object['projectName']){//没有提交时,才提交任务
+                                flag=false;
+                            }
+                        }
+                    }
+                });
+                if(flag){
+                    object1={
+                        projectName: object['projectName'],
+                        taskType: 'UMTS',
+                        status: 'Forecast: Success Audit:Running',
+                        createUser: username || 't00123456',
+                        createTime: getTime(),
+                        operation: '<a href="javascript:;">Forcast Result</a>'
+                    };
+                    page3.push(object1);
+                    console.log(page3)
+                    localStorage.setItem('page3',JSON.stringify(page3));
+                }    
+            });
+        });
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent">
+        <div class="kea_menu">
+            <ul>
+                <li class="menu_active">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main" id="shiying">
+            <div class="kea_progress">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid">
+                        <div class="animation">
+                            <div class="flex1 flex">
+                                <div class="flex1_2 flex Rotation">
+                                    <div class="flex1_3 flex Rotation_a">
+
+                                    </div>
+                                </div>
+                                <div class="flex1_txt">
+                                </div>
+                            </div>
+                            <div class="flex2 flex">
+                                <!--左起第二列  上下各一个-->
+                                <div class="flex1_2 flex Rotation small-animation">
+                                </div>
+                            </div>
+                            <div class="flex3">
+                                <div class="flex1_2 flex Rotation small-animation">
+                                </div>
+                            </div>
+                            <div class="flex4">
+                                <div class="flex1_2 flex Rotation small-animation">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="first">
+                            <p>RNC Level Task List</p>
+                            <div class="container-fluid" id="content" style="padding-bottom: 35px;">
+                                <div class="contain">
+                                    <table class="table">
+                                        <tr>
+                                            <td>Task Type</td>
+                                            <td>Wireless Level</td>
+                                            <td>Project Name</td>
+                                            <td>Creates Time</td>
+                                            <td>Status</td>
+                                            <td>Operation</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="four">
+                            <p>Capacity Audit Parameter</p>
+                            <form class="form-horizontal" action="" method="post">
+                                <div class="row" style="height: 90px;padding-top: 20px;">
+                                    <div class="form-group col-lg-5">
+                                        <label class="col-lg-5 control-label">Nodeu CNEAP PAR:</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" name="nodeu" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-5">
+                                        <label class="col-lg-5 control-label">Equipment Load Threshoid:</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" name="equipment" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a>
+                <button class="btn btn-primary" onclick="alertMsg(accessmsg, 'page_10.html')">Executive</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+</body>
+</html>

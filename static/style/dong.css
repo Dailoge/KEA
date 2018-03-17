@@ -1,0 +1,362 @@
+.kea_progress {
+  height:850px;
+  padding:20px 15px;
+}
+
+.nomenu {
+  height:905px!important;
+}
+
+.kea_body_coentent {
+  height:965px!important;
+}
+
+.kea_body_coentent_main {
+  margin-top:10px;
+  height:auto!important;
+  min-height:350px;
+}
+
+a.file {
+  position:relative;
+  display:inline-block;
+  overflow:hidden;
+  border-radius:4px;
+  line-height:10px;
+  background:#28a0dc;
+  color:#fff;
+  text-decoration:none;
+  cursor:pointer;
+  padding:10px 15px;
+}
+
+a.file input {
+  position:absolute;
+  left:0;
+  top:0;
+  opacity:0;
+  cursor:pointer;
+}
+
+input[type=text] {
+  background:#2f323d;
+  color:#fff;
+  border:1px solid #3b3e4b;
+}
+.form-control[disabled]{
+  background-color: rgb(47, 50, 61) !important;
+}
+select {
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  background:url(../img/select.png) no-repeat scroll right center!important;
+  border:none!important;
+  background-color:#2f323d!important;
+  color:#fff!important;
+  padding:0!important;
+}
+
+select option {
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  height:20px;
+  padding-left:15px;
+}
+
+.clearfix::after {
+  content:'\0020';
+  display:block;
+  height:0;
+  clear:both;
+}
+
+li {
+  list-style:none;
+}
+
+#first,#second,#three,#four {
+  border:1px solid #28d8b2;
+  border-radius:4px;
+  margin-top:20px;
+}
+
+#second {
+  border-color:#ffd450;
+}
+
+#three {
+  border-color:#745fa4;
+}
+
+#four {
+  border-color:#00acff;
+}
+
+#first p,#second p,#three p,#four p, #privilege-info th{
+  background:#28d8b2;
+  height:32px;
+  line-height:32px;
+  margin-left:0;
+  margin-right:0;
+  padding-left:20px;
+  color:#000;
+  font-size:16px;
+  font-weight:700;
+}
+
+#second p {
+  background:#ffd450;
+}
+
+#three p {
+  background:#745fa4;
+}
+
+#four p {
+  background:#00acff;
+}
+
+#first p a,#second p a,#three p a,#four p a {
+  display:block;
+  float:right;
+  padding-right:20px;
+  text-decoration:none;
+  color:#000;
+}
+
+#bottom-button button , .filter-button{
+  width:95px;
+  height:33px;
+  line-height:33px;
+  margin:10px;
+  padding:0!important;
+  font-weight:400;
+  font-size:18px;
+}
+
+#content {
+  padding-top:5px;
+}
+
+table {
+  border:1px solid #de9200!important;
+  border-collapse:separate;
+  margin-bottom:5px!important;
+}
+
+td {
+  border-top:1px solid #de9200!important;
+  text-align:center;
+  vertical-align:middle!important;
+  line-height:1!important;
+  padding:4px!important;
+}
+
+.scroll {
+  overflow:auto;
+}
+
+.chart-title {
+  font-size:16px;
+  padding-top:5px;
+}
+
+.chart-title div.left {
+  float:left;
+  margin:5px 0;
+}
+
+.chart-title div.right {
+  float:right;
+}
+
+.chart-title::after {
+  content:'\0020';
+  clear:both;
+  display:block;
+  height:0;
+}
+
+.chart-title div.right li {
+  float:left;
+  list-style:none;
+  width:60px;
+  height:28px;
+  line-height:28px;
+  text-align:center;
+  background:#969696;
+  margin-right:2px;
+  cursor:pointer;
+}
+
+.chart-title div.right li:first-child {
+  border-radius:6px 0 0 6px;
+}
+
+.chart-title div.right li:last-child {
+  border-radius:0 6px 6px 0;
+}
+
+.chart-title div.right li.active {
+  background:#01c5fe;
+  color:#fff;
+}
+
+.line-chart {
+  border:1px solid #272f4b;
+  margin-top:5px;
+  background:#1d2338;
+}
+
+.line-chart div.select1 select option,.chart-bg .select1 select option {
+  background-color:#dcdcdc;
+  color:#000;
+  margin:2px 5px;
+}
+
+.chart-bg {
+  overflow:auto;
+  border:1px solid #272f4b;
+  margin-top:5px;
+  background:#1d2338;
+}
+
+.expan-suggestion {
+  border:2px solid #3B3E4B;
+  border-radius:2px;
+  padding-left:5px;
+  background:#2F323D;
+  margin:5px 0;
+}
+
+.expan-suggestion label {
+  margin:5px 0;
+}
+
+.chart-select {
+  height:37px;
+  background:#161b2d;
+}
+
+.chart-block {
+  border:1px solid #fff;
+  border-radius:5px;
+  padding-bottom:5px;
+  margin:10px 5px;
+}
+
+.border-green {
+  border-color:#239A83;
+}
+
+.border-yellow {
+  border-color:#C6A747;
+}
+
+#pie-chart ,#pie-chart1{
+  width:750px;
+  height:300px;
+  background:#1D2338;
+}
+
+#bar-chart, #bar-chart1 {
+  width:830px;
+  height:300px;
+}
+
+#next button {
+  width:95px;
+  height:33px;
+  line-height:33px;
+  font-weight:700;
+  margin:15px;
+  padding:0!important;
+}
+
+.none {
+  display:none;
+}
+
+.operator-select {
+  background-color:transparent!important;
+  background-image:url(../../static/img/select3.png)!important;
+  width:100%;
+  box-sizing:border-box;
+  padding-left:25px!important;
+}
+
+.operator-select option {
+  padding-left:25px!important;
+  background-color:#18191f!important;
+}
+
+ul.chart-list li {
+  float:left;
+  margin-left:10px;
+  margin-top:2px;
+  border-right:1px solid #00acff;
+  border-bottom:1px solid transparent;
+  padding-right:5px;
+  color:#00acff;
+  cursor:pointer;
+}
+
+ul.chart-list li.active {
+  color:#fff;
+  border-bottom:1px solid #00acff;
+}
+
+.table-container {
+  border:1px solid #de9200;
+  height:822px;
+  position:relative;
+}
+
+.table-container div.table-inform {
+  height:60px;
+  background:#1f2837;
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+}
+
+.table-container div ul,.table-container div.table-inform p {
+  float:right;
+  margin-right:50px;
+  height:60px;
+  line-height:60px;
+}
+
+.table-container div ul li {
+  float:left;
+  line-height:60px;
+  margin-right:10px;
+  cursor:pointer;
+}
+
+#shiying {
+  height:965px;
+}
+
+#bottom-button,#next {
+  padding-right:50px;
+}
+
+.line-chart div.select1,.chart-bg .select1,.line-chart div.select1 {
+  background:#161b2d;
+  height:37px;
+}
+
+.line-chart div.select1 select,.chart-bg .select1 select,.line-chart div.select1 select {
+  background-color:transparent!important;
+  background-image:url(../../static/img/select3.png)!important;
+  width:200px;
+  height:37px!important;
+  padding-left:15px!important;
+}
+td p{
+  margin-bottom: 0px !important;
+}

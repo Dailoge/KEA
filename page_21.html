@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_21</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" href="./static/style/dong.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <script src="./static/js/echarts.common.min.js"></script>
+    <script src="./static/js/pie.js"></script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent">
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress nomenu">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="container-fluid chart-block border-yellow">
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">Cluster Level Signal Forecast</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="chart-bg">
+                                        <div class="chart-select">
+                                        </div>
+                                        <div id="cluster-pie-chart" style="height: 330px"></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">S1 Interface Paging Load</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="chart-select">
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="s1-line-chart" style="height: 330px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container-fluid chart-block border-green">
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">Board Load</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="chart-select">
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="boradload-line-chart" style="height: 330px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">PRB Load</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="chart-select">
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="PRB-line-chart" style="height: 330px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="javascript:window.history.back()">
+                <button class="btn btn-primary">Back</button>
+            </a>
+            <a href="new22.html">
+                <button class="btn btn-primary">Submit</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+<script>
+    chartById("s1-line-chart");
+    chartById("PRB-line-chart");
+    chartById("boradload-line-chart");
+    var pie_chart = echarts.init(document.getElementById('cluster-pie-chart'));
+    pie_chart.setOption(pie_option);
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_20</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <link rel="stylesheet" href="./static/style/animation.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/echarts.common.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <style type="text/css">
+        .bg {
+            height: 348px;
+            margin-top: 20px;
+        }
+
+        .bg img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .animation {
+            background: url("./static/img/4g-4.png") no-repeat 50% 50%;
+            background-size: cover;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var option1 = {
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['14:00', '15:00', , '16:00', '17:00', '18:00', '19:00',],
+                        axisLabel: {
+                            interval: 0,
+                            rotate: 40,
+                            color: '#048ce4',
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        type: 'line',
+                        smooth: 'true',
+                        lineStyle: {normal: {color: '#e8c752'}},
+                        areaStyle: {normal: {color: '#e8c752', opacity: 0.4}},
+                        data: [200, 320, 100, 440, 300, 200]
+                    },
+                    {
+                        type: 'line',
+                        smooth: 'true',
+                        lineStyle: {normal: {color: '#03e3ec'}},
+                        areaStyle: {normal: {color: '#03e3ec', opacity: 0.4}},
+                        data: [200, 120, 110, 340, 200, 330]
+                    },
+                ]
+            };
+            chartById('cluster1', option1);
+            chartById('cluster2', option1);
+            $('select').change(function () {
+                var id = $(this).attr('attr');
+                chart(id, 14);
+            });
+        });
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent">
+        <div class="kea_menu">
+            <ul>
+                <li class="menu_active">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid">
+                        <div class="animation">
+                            <div class="flex1 flex">
+                                <div class="flex1_2 flex Rotation">
+                                    <div class="flex1_3 flex Rotation_a">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex6 flex">
+                                <div class="flex1_2 flex Rotation small-animation"></div>
+                            </div>
+                            <div class="flex7 flex">
+                                <div class="flex1_2 flex Rotation small-animation"></div>
+                            </div>
+                            <div class="flex8 flex">
+                                <div class="flex1_2 flex Rotation">
+                                    <div class="flex1_3 flex Rotation_a">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="first">
+                            <p>Cluster Level Forecast</p>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="chart-title">
+                                            <div class="left">User Number</div>
+                                            <div class="right">
+                                                <ul>
+                                                    <li class="active">Figure</li>
+                                                    <li>Table</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="line-chart">
+                                            <div class="select1">
+                                                <select name="" attr="cluster1" style="width: 250px;">
+                                                    <option>USER_ULSYNC_FORECAST</option>
+                                                    <option>test2</option>
+                                                    <option>test3</option>
+                                                    <option>test4</option>
+                                                </select>
+                                            </div>
+                                            <div class="scroll">
+                                                <div id="cluster1" style="height: 330px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="chart-title">
+                                            <div class="left">User Model</div>
+                                            <div class="right">
+                                                <ul>
+                                                    <li class="active">Figure</li>
+                                                    <li>Table</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="line-chart">
+                                            <div class="select1">
+                                                <select name="" attr="cluster2">
+                                                    <option>UL_PRB_FORECAST</option>
+                                                    <option>test2</option>
+                                                    <option>test3</option>
+                                                    <option>test4</option>
+                                                </select>
+                                            </div>
+                                            <div class="scroll">
+                                                <div id="cluster2" style="height: 330px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="page_21.html">
+                <button class="btn btn-primary">Execute</button>
+            </a>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+</body>
+</html>

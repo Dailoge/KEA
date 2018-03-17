@@ -1,0 +1,345 @@
+.kea_body {
+height:auto!important;
+min-height:100vh;
+}
+.container-fluid {
+    margin-top: 5px;
+}
+.kea_body_coentent_main {
+height:auto!important;
+min-height:350px;
+margin-top:10px;
+}
+
+a.file {
+position:relative;
+display:inline-block;
+overflow:hidden;
+border-radius:4px;
+line-height:10px;
+background:#28a0dc;
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+padding:10px 15px;
+}
+
+a.file input {
+position:absolute;
+left:0;
+top:0;
+opacity:0;
+cursor:pointer;
+}
+
+input[type=text] {
+background:#2f323d;
+color:#fff;
+border:3px solid #3b3e4b;
+}
+
+select {
+appearance:none;
+-moz-appearance:none;
+-webkit-appearance:none;
+background:url(../img/select.png) no-repeat scroll right center!important;
+padding-right:14px;
+border:none!important;
+background-color:#2f323d!important;
+color:#fff!important;
+}
+
+select option {
+appearance:none;
+-webkit-appearance:none;
+-moz-appearance:none;
+height:35px;
+padding:10px 0 10px 15px;
+}
+
+#first,#second,#three {
+border:1px solid #28d8b2;
+border-radius:4px;
+margin-top:20px;
+}
+
+#second {
+border-color:#ffd450;
+}
+
+#three {
+border-color:#745fa4;
+}
+
+#first p,#second p,#three p {
+background:#28d8b2;
+height:32px;
+line-height:32px;
+margin-left:-15px;
+margin-right:-15px;
+padding-left:20px;
+color:#000;
+font-size:16px;
+font-weight:700;
+}
+
+#second p {
+background:#ffd450;
+}
+
+#three p {
+background:#745fa4;
+}
+
+.form-control[readonly] {
+background:#2f323d;
+}
+
+label.control-label.col-lg-4 {
+padding-right:5px;
+padding-left:5px;
+}
+
+.dropdown-menu {
+background-color:#2f323d;
+color:#fff;
+}
+
+.kea_progress {
+height:847px;
+}
+
+.bg img {
+width:100%;
+height:100%;
+}
+
+#first p {
+margin-left:0;
+margin-right:0;
+}
+
+.row-margin-top {
+margin-top:0;
+}
+
+.table {
+border:2px #3B3E4B;
+height:100%;
+}
+
+input {
+border:none!important;
+}
+
+#content {
+height:110px;
+border:2px solid #3B3E4B;
+}
+
+#content tr:nth-child(1) {
+background:#1D2D51;
+color:#fff;
+font-weight:700;
+}
+
+.table td,.table th {
+border:0;
+word-break:keep-all;
+white-space:nowrap;
+text-align:left;
+}
+
+.table th {
+border-top:0!important;
+padding:5px!important;
+}
+
+.table td {
+border-top:2px solid #3B3E4B!important;
+padding:0 8px!important;
+}
+
+#content .table {
+height:0;
+}
+
+.table tr:last-child {
+border-bottom:2px solid #3B3E4B;
+}
+
+.control-label {
+padding-right:2px;
+}
+
+.form-horizontal .form-group {
+margin-right:-15px;
+margin-left:0;
+}
+
+.guarantee-time,.guarantee-details {
+border:2px solid #3B3E4B;
+background:#2F323D;
+display:flex;
+justify-content:center;
+}
+
+.guarantee-time {
+width:302.88px;
+margin-top:-15px;
+}
+
+.special-days {
+    background: #000 url(../img/guarantee_date.png) no-repeat center !important;
+}
+
+.gday-box {
+display:flex;
+}
+
+span.input-group-addon {
+background:#2F323D;
+border:none;
+color:#46C1FC;
+}
+
+.calen-div-bg {
+background:#2F323D;
+border:2px solid #3B3E4B;
+height:183px;
+margin:10px 0;
+}
+
+.date_bg {
+display:flex;
+justify-content:center;
+height:160px;
+}
+
+#datetimepicker {
+color:#FFF;
+}
+
+#datetimepicker .dow,#datetimepicker .day {
+border:2px solid #3B3E4B;
+line-height:5px!important;
+height:0!important;
+}
+
+#datetimepicker .day {
+background:#000;
+}
+
+#datetimepicker table td {
+line-height:0;
+}
+
+#datetimepicker table td span {
+line-height:20px;
+height:20px;
+}
+
+#datetimepicker .next span,#datetimepicker .prev span {
+color:#5AC2EA;
+}
+
+.g-time-number-l {
+color:#fff;
+text-align:right;
+position:absolute;
+right:10px;
+bottom:0;
+}
+
+.g-time-detail-table td {
+border-top:2px solid #3B3E4B;
+padding:0;
+}
+
+.g-time-detail-table th {
+text-align:center;
+border-top:0;
+background:#1D2D51;
+width:32px;
+padding:5px 0;
+}
+
+.g-time-detail-table {
+height:0;
+width:100%;
+color:#fff;
+border-bottom:2px solid #3B3E4B;
+    margin-bottom: 0px;
+}
+
+#g-time-detail {
+border:2px solid #3B3E4B;
+height:125px;
+position:relative;
+background:#000;
+}
+#g-time-detail .col-lg-4 {
+    padding:0px;
+    border-right:2px solid #3B3E4B;
+    border-bottom:2px solid #3B3E4B;
+    height:50px;
+    background:#FB4646;
+}
+#g-time-detail .col-lg-4 .detail-label {
+    border-bottom:2px solid #3B3E4B;background: #000
+}
+.calen-show-style {
+margin-right:20px;
+width:307px;
+position:absolute;
+}
+
+.col-lg-5 {
+padding:0;
+}
+
+#bottom-button button {
+width:95px;
+height:33px;
+line-height:33px;
+font-weight:700;
+margin:10px;
+padding:0!important;
+
+    font-weight:400;
+    font-size:18px;
+}
+
+#bottom-button {
+padding-right:50px;
+}
+
+#datetimepicker .dow,#datetimepicker table thead tr:first-child th:hover
+,#datetimepicker table td.day:hover,#datetimepicker table td span:hover,
+#datetimepicker1 table tr:first-child th:hover,
+#datetimepicker1 table td.day:hover,
+#datetimepicker1 table td span:hover,
+#datetimepicker2 table tr:first-child th:hover,
+#datetimepicker2 table td.day:hover,
+#datetimepicker2 table td span:hover,
+#datetimepicker table td.day.active
+{
+background:#1D2D51;
+}
+#datetimepicker table td.today:before
+{
+    border:none
+}
+.GTime {
+width:17px;
+height:17px;
+border-radius:2px;
+margin:1px;
+}
+
+.add-button {
+height:20px;
+width:20px;
+background:transparent;
+border:none;
+}

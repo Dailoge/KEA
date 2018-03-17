@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_11</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <link rel="stylesheet" href="./static/style/animation.css">
+
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/echarts.common.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <style type="text/css">
+        #first .top {
+            height: 32px;
+            background: #28d8b2;
+        }
+
+        #first .top .left {
+            font-size: 16px;
+            line-height: 32px;
+            padding-left: 20px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #first .right .select {
+            background: url('./static/img/select1.png') no-repeat;
+            height: 32px !important;
+        }
+
+        #first .right .select select {
+            background-color: transparent !important;
+            box-sizing: border-box;
+            padding-left: 23px !important;
+            background-image: url('./static/img/select2.png') !important;
+            color: #000 !important;
+            font-weight: bold;
+            height: 32px !important;
+            margin-left: -8px;
+        }
+
+        #first .right .export a {
+            display: block;
+            color: #000;
+            font-size: 16px;
+            line-height: 32px;
+            font-weight: bold;
+            height: 32px;
+            text-align: right;
+            text-decoration: none;
+        }
+
+        #cluster1, #cluster2, #cluster3, #cluster4 {
+            width: 900px;
+        }
+        .animation {
+            background: url("./static/img/3g-5.png") no-repeat 50% 50%;
+            background-size: cover;
+            width: auto;
+            margin-bottom: 20px;
+        }
+        .flex1 {
+            margin-left: 62px!important;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            chartById('cluster1');
+            chartById('cluster2');
+            chartById('cluster3');
+            chartById('cluster4');
+            $('select').change(function () {
+                var id = $(this).attr('attr');
+                if (id == 'all') {
+                    chart('cluster1', 14);
+                    chart('cluster2', 14);
+                    chart('cluster3', 14);
+                    chart('cluster4', 14);
+                } else {
+                    chart(id, 14);
+                }
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent">
+        <div class="kea_menu">
+            <ul>
+                <li class="menu_active">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress scroll">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid">
+                        <div class="animation">
+                            <div class="flex1 flex">
+                                <div class="flex1_2 flex Rotation">
+                                    <div class="flex1_3 flex Rotation_a">
+
+                                    </div>
+                                </div>
+                                <div class="flex1_txt">
+                                </div>
+                            </div>
+                            <div class="flex2 flex">
+                                <!--左起第二列  上下各一个-->
+                                <div class="flex1_2 flex Rotation small-animation">
+                                </div>
+                            </div>
+                            <div class="flex3">
+                                <div class="flex1_2 flex Rotation small-animation">
+                                </div>
+                            </div>
+                            <div class="flex4">
+                                <div class="flex1_2 flex Rotation small-animation">
+                                </div>
+                            </div>
+                            <div class="flex8 flex">
+                                <div class="flex1_2 flex Rotation">
+                                    <div class="flex1_3 flex Rotation_a"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="first" style="margin-top: 0px">
+                            <div class="top" style="">
+                                <div class="col-lg-8 left">Cluster Level Forecast</div>
+                                <div class="col-lg-4 right">
+                                    <div class="col-lg-10 select">
+
+                                        <select class="form-control" attr="all">
+                                            <option>福州市海峡奥林匹克运动中心主体育场</option>
+                                            <option>test2</option>
+                                            <option>test3</option>
+                                            <option>test4</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 export"><a href="javascript:;">Export</a></div>
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="col-lg-6" style="padding: 0 4px 0 0;">
+                                    <div class="chart-title">
+                                        <div class="left">User Number</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="select1">
+                                            <select name="" attr="cluster1">
+                                                <option>FORECAST_HSDPA_UE</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="cluster1" style="height: 283px;"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6" style="padding: 0 6px 0 0;">
+                                    <div class="chart-title">
+                                        <div class="left">User Model</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="select1">
+                                            <select name="" attr="cluster2">
+                                                <option>FORECAST_CS_Traffic</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="cluster2" style="height: 283px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="second">
+                            <p style="margin-bottom: 0px;">RNC Level Forcast<a href="javascript:;">Export</a></p>
+                            <div class="container-fluid">
+                                <div class="col-lg-6" style="padding: 0 6px 0 0;">
+                                    <div class="chart-title">
+                                        <div class="left">User Number</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="select1">
+                                            <select name="" attr="cluster3">
+                                                <option>FORECAST_HSDPA_UE</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="cluster3" style="height: 283px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" style="padding: 0 4px 0 0;">
+                                    <div class="chart-title">
+                                        <div class="left">User Model</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="select1">
+                                            <select name="" attr="cluster4">
+                                                <option>FORECAST_CS_Traffic</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="cluster4" style="height: 283px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="javascript:window.history.back()">
+                <button class="btn btn-primary">Back</button>
+            </a>
+            <a href="page_19.html">
+                <button class="btn btn-primary">Submit</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+</body>
+</html>

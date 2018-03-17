@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_11</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/echarts.common.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <style type="text/css">
+        #first {
+            margin-top: 0;
+        }
+
+        #second {
+            border-color: #de9200;
+        }
+
+        #first, #second {
+            height: 390px;
+        }
+
+        .col-lg-7 {
+            margin-top: 5px;
+        }
+
+        .control-label, .message-label {
+            width: 240px;
+            font-weight: 400;
+            margin: 20px;
+        }
+
+        .control-label {
+            text-align: right;
+        }
+
+        .message-label {
+            margin-left: 80px;
+        }
+
+        #privilege-info {
+            width: 100%;
+            height: 100%;
+            border: none !important;
+        }
+
+        #privilege-info tr {
+            border-top: 1px solid #de9200;
+        }
+
+        #privilege-info th {
+            background-color: #de9200;
+            padding-left: 15px;
+        }
+
+        #privilege-info td {
+            height: 85px;
+            text-align: left;
+            padding-left: 30px !important;
+        }
+
+        #bottom-button button {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent">
+        <div class="kea_menu">
+            <ul>
+                <li onclick="window.location.href='page_4.html'">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li class="menu_active">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid">
+                        <div id="first">
+                            <p>Model Checklist</p>
+                            <div class="col-lg-7">
+                                <label for="" class="control-label">China Domain Account:</label>
+                                <label for="" class="message-label" id="account">I00226022</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <label for="" class="control-label">Region:</label>
+                                <label for="" class="message-label" id="region">China Region</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <label for="" class="control-label">Country:</label>
+                                <label for="" class="message-label" id="country">China</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <label for="" class="control-label">Valid Date:</label>
+                                <label for="" class="message-label" id="date">2015-10-22 &nbsp&nbsp To &nbsp&nbsp
+                                    2017-12-31</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <label for="" class="control-label">User Type:</label>
+                                <label for="" class="message-label" id="userType">Ordinary</label>
+                            </div>
+                        </div>
+                        <div id="second">
+                            <table id="privilege-info">
+                                <col width="300"/>
+                                <col width="300"/>
+                                <col width="300"/>
+                                <tr>
+                                    <th>Privilege Information</th>
+                                    <th>｜Approval Status</th>
+                                    <th>｜Manager Domain Account</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="page_19.html">
+                <button class="btn btn-primary">Privilege Apply</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+<script type="text/javascript">
+    function priAddTd(item) {
+        var table = document.getElementById("privilege-info");
+        var tr = document.createElement("tr");
+        var infoTd = document.createElement("td");
+        infoTd.innerText = item;
+        var statusTd = document.createElement("td");
+        statusTd.innerText = priStatus[1];
+        var accountTd = document.createElement("td");
+        accountTd.innerText = accounts;
+        tr.appendChild(infoTd);
+        tr.appendChild(statusTd);
+        tr.appendChild(accountTd);
+        table.appendChild(tr);
+    }
+
+    var priInfos = ["Data Upload(Default Privilege)", "Traffic Model Inquiry In Country Level",
+        "Traffic Model Inquiry in Global Level", "Traffic Forecast And Country Audit"];
+    var priStatus = ["Applied", "Not Applied"];
+    var accounts = "c00182089,j00329568,c00151537,I00226022,w00213632,g00209852,s00171857,w00239744";
+    priInfos.forEach(priAddTd);
+</script>
+</body>
+</html>

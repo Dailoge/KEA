@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_12</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" href="./static/style/dong.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <script src="./static/js/echarts.common.min.js"></script>
+    <script src="./static/js/pie.js"></script>
+    <script src="./static/js/bar.js"></script>
+<style type="text/css">
+.auditResult{
+	background: #28d8b2;
+	line-height: 2.5;
+	color: #000;
+	padding-left: 15px;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 16px;
+}
+.auditResult a{
+	display: inline-block;
+	float: right;
+	margin-right: 30px;
+	color: #000;
+}
+</style>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent">
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress nomenu scroll">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid">
+                        <div class="row">
+                        	<p class="auditResult">Capacity Audit Result<a href="javascript:;">Export</a></p>
+                            <div class="container-fluid chart-block border-yellow">
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">TCP</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="select1">
+                                            <select name="" attr="TCP-line-chart">
+                                                <option>test1</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="TCP-line-chart" style="height: 300px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" style="">
+                                    <div class="chart-title">
+                                        <div class="left">RTWP</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="chart-bg" style="overflow: auto">
+                                        <div class="chart-select">
+                                        </div>
+                                        <div id="bar-chart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container-fluid chart-block border-green">
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">SPU LOAD Contribution</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="chart-bg">
+                                        <div class="chart-select">
+                                        </div>
+                                        <div id="pie-chart"></div>
+                                    </div>
+                                    <div class="expan-suggestion">
+                                        <label for="">New Expansion Board SPUb Brd: <span
+                                                style="color:red">0.0</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">Forecast SPU Load</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="select1">
+                                            <select name="" attr="SPU-line-chart">
+                                                <option>test1</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="SPU-line-chart" style="height: 320px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container-fluid chart-block border-yellow">
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">CE</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="select1">
+                                            <select name="">
+                                                <option>Manacana Stadium</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="scroll">
+                                            <div style="height:300px;width:830px">
+                                                <label style="color:red;margin:50px 180px">NodeB License and DSP BRDMFRINFO Data Missing!</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" style="">
+                                    <div class="chart-title">
+                                        <div class="left">CCH</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="chart-bg" style="overflow: auto">
+                                        <div class="select1">
+                                            <select name="" attr="bar-chart">
+                                                <option>Manacana Stadium</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div id="bar-chart1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container-fluid chart-block border-green">
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">Code Load Contribution</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="chart-bg">
+                                        <div class="select1">
+                                            <select name="" attr="pie-chart">
+                                                <option>Manacana Stadium</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div id="pie-chart1"></div>
+                                    </div>
+                                    <div class="expan-suggestion">
+                                        <label for="">Expansion Suggestion: New Expansion Cell Num:<span
+                                                style="color:red">0</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="chart-title">
+                                        <div class="left">Code Average Load Contribution</div>
+                                        <div class="right">
+                                            <ul>
+                                                <li class="active">Figure</li>
+                                                <li>Table</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="line-chart">
+                                        <div class="select1">
+                                            <select name="" attr="SPU-line-chart">
+                                                <option>Manacana Stadium</option>
+                                                <option>test2</option>
+                                                <option>test3</option>
+                                                <option>test4</option>
+                                            </select>
+                                        </div>
+                                        <div class="scroll">
+                                            <div id="SPU-line-chart1" style="height: 320px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="javascript:window.history.back()">
+                <button class="btn btn-primary">Back</button>
+            </a>
+            <a href="page_10.html">
+                <button class="btn btn-primary">Submit</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+<script>
+    chartById("TCP-line-chart");
+    chartById("SPU-line-chart")
+    var pie_chart = echarts.init(document.getElementById('pie-chart'));
+    pie_chart.setOption(pie_option);
+    var bar_chart = echarts.init(document.getElementById('bar-chart'));
+    ;
+    bar_chart.setOption(bar_option);
+    $('select').change(function () {
+        var id = $(this).attr('attr');
+        chart(id, 14);
+    });
+    //page13
+    // chartById("TCP-line-chart");
+    chartById("SPU-line-chart1");
+    var pie_chart1 = echarts.init(document.getElementById('pie-chart1'));
+    pie_chart1.setOption(pie_option);
+    var bar_chart1 = echarts.init(document.getElementById('bar-chart1'));
+    bar_chart1.setOption(bar_option2);
+    $('select').change(function () {
+        var id = $(this).attr('attr');
+        if (/line/.test(id)) {
+            chart(id, 14);
+        }
+    });
+</script>
+</body>
+</html>

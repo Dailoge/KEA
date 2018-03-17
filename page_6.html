@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_6</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/jquery.datetimepicker.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <script type="text/javascript" src="./static/js/jquery.datetimepicker.full.js"></script>
+    <script type="text/javascript" src="./static/js/echarts.common.min.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        td {
+            border-color: #1a243e !important;
+        }
+
+        #content tr:nth-child(1), #three tr:nth-child(1) {
+            background: #1a243e;
+            color: #fff;
+        }
+        #content {
+            padding-top: 0px;
+        }
+
+        table {
+            border: 1px solid #1a243e !important;
+        }
+
+        #first {
+            border-color: #00acff;
+        }
+
+        #first p {
+            background: #00acff;
+        }
+
+        #second {
+            border-color: #5268b4;
+        }
+
+        #second p {
+            background: #5268b4;
+        }
+
+        #three {
+            border-color: #28d8b2;
+        }
+
+        #three p {
+            background: #28d8b2;
+        }
+
+        #four {
+            border-color: #ffd450;
+        }
+
+        #four p {
+            background: #ffd450;
+        }
+
+        #first {
+            margin-top: 0px;
+        }
+
+        #second, #three, #four {
+            margin-top: 12px;
+        }
+
+        .form-control {
+            height: 20px !important;
+            padding: 1px 3px !important;
+        }
+
+        .form-group {
+            margin-bottom: 5px !important;
+        }
+
+        .form-horizontal .control-label {
+            padding-top: 0px !important;
+        }
+
+        #second ul li {
+            float: left;
+            list-style: none;
+            width: 150px;
+        }
+
+        #second ul li:first-child {
+            border-right: 1px solid #fff;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var object = getData();
+            var datels = JSON.parse(localStorage['gtime']);
+            var startdate = datels['date1'];
+            var enddate = datels['date2'];
+            var datels1 = JSON.parse(localStorage['p6data']);
+            var starttime = datels1['starttime'], endtime = datels1['endtime'];
+            var data = {
+                choose: "<input type='radio' checked>",
+                eventType: object['eventType'] || 'Sports Category',
+                subEventType: object['eventType1'] || 'Football',
+                region: object['region'] || 'American Rep Office',
+                country: object['country'] || 'United States',
+                operator: object['operator'] || 'AM American Movil',
+                clusterName: object['clusterName'] || 'NationalStadium',
+                wireless: object['wireless'] || 'UMTS',
+                occurDate: startdate+' to '+enddate || '2016-08-30 to 2016-09-15',
+                busyTime: [busytime(startdate,starttime,endtime), busytime(enddate,starttime,endtime)],
+                projectName: object['projectName'] || 'projectname',
+                trafficPeriod: object['trafficPeriod'] || '30 minutes'
+            };
+            var tr = document.createElement('tr');
+            for (var i in data) {
+                var td = document.createElement('td');
+                if (i == 'busyTime') {
+                    var select = document.createElement('select');
+                    select.className = 'form-control';
+                    select.name = 'busyTime';
+                    for (var j in data[i]) {
+                        var option = document.createElement('option');
+                        option.innerHTML = data[i][j];
+                        select.appendChild(option);
+                    }
+                    td.appendChild(select);
+                } else {
+                    td.innerHTML = data[i];
+                }
+                tr.appendChild(td);
+                $('#content table').append(tr);
+            }
+            var option1 = {
+                legend: {
+                    data: ['CS AMR UE', 'CALL HSDPA UE'],
+                },
+                xAxis: [
+                    {
+                        data: getTimeArr(13,24,30)
+                    }
+                ],
+                series: [
+                    {
+                        name: 'CS AMR UE',
+                        data: []
+                    },
+                    {
+                        name: 'CALL HSDPA UE',
+                        data: []
+                    },
+                ]
+            };
+            var x_data = [50,90,90,90,100,120,130,180,360,640,800,810,810,850,840,830,840,810,700,180,100,90,70,70];
+            var x_data1 = [10,20,30,40,20,50,30,40,30,80,80,100,70,60,50,40,30,30,30,30,20,20,30];
+            option1.series[0].data = x_data;
+            option1.series[1].data = x_data1;
+            chartById('operatorChart', option1);
+            $('#second ul li select').change(function () {
+                var value = $(this).val();
+                for (var i = 0; i < 20; i++) {
+                    x_data[i] = Math.random() * 900;
+                }
+                for (var i = 0; i < 20; i++) {
+                    x_data1[i] = Math.random() * 900;
+                }
+                option1.series[0].data = x_data;
+                option1.series[1].data = x_data1;
+                chartById('operatorChart', option1)
+            });
+            var forccastFactor = JSON.parse(localStorage.getItem('forccastFactor'));
+            var rndffdata = [2.58,6.5919,0,0.7114,1.721,0,0,0,0,4.9117,0,2.2002,0.166,1.8071,1.6174,1.4159,0.6416,
+                0.6519,0.7416,0.6241,0.7101,1.1607,1.4105,1.0071,1.171,1.0251,0.9504,0.7478,1.5085,1.8111,1.5304,
+                1.2751,1.2261,1.0141,0.7924,0.6723,0.4063,0.4053];
+            var data1 = [];
+            if (true) {
+            // if (forccastFactor == null) {
+                var timearr = getTimeArr(0,24,30);
+                timearr.forEach(function (item) {
+                    var tmp = [];
+                    tmp.push(item);
+                    for (var i=0;i<11;i++){
+                        tmp.push(rndffdata[parseInt(Math.random() * rndffdata.length)]);
+                    }
+                    //console.log(tmp);
+                    data1.push(tmp);
+                });
+            }
+            // console.log(data1);
+            data1.forEach(function (item, index, array) {
+                var tr = document.createElement('tr');
+                for (var i in item) {
+                    var td = document.createElement('td');
+                    var input = document.createElement('input');
+                    input.className = 'form-control';
+                    input.type = 'text';
+                    
+                    if(i==0){
+                      input.disabled='true';
+                      //console.log(item[i]);
+                    }
+                    input.value = item[i];
+                    td.appendChild(input);
+                    tr.appendChild(td);
+                }
+                $('#three table').append(tr);
+            });
+            var option2 = {
+                grid: {
+                    left: '0.5%',
+                    bottom: '0%',
+                },
+                legend: {
+                    data: [],
+                },
+                xAxis: [
+                    {
+                        data: [],
+                    }
+                ],
+                series: [
+                    {
+                        name: '',
+                        data: [],
+                        line: {
+                            lineStyle: {
+                                normal: {
+                                    color: "#fff"
+                                }
+                            }
+                        }
+                    }
+                ]
+            };
+            var $data = $('#three table');
+            var data_x = [];
+            var data_y = [];
+            //获取表格中input的值
+            for (var i = 0; i < $data.find('tr').length - 1; i++) {
+                var item = $data.find('tr').eq(i + 1).find('td').eq(0).find('[type=text]').val();
+                data_x.push(item);
+            }
+            for (var i = 0; i < $data.find('tr').length - 1; i++) {
+                var item = $data.find('tr').eq(i + 1).find('td').eq(1).find('[type=text]').val();
+                data_y.push(item);
+            }
+            option2.xAxis[0].data = data_x;
+            option2.series[0].name = 'AMR User Factor';
+            option2.series[0].data = data_y;
+            chartById('tendencyChart', option2, 1);
+            $('#four ul li').click(function () {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+                var num = $(this).index();
+                var name = $data.find('tr').eq(0).find('td').eq(num + 1).text();
+                var data_y = [];
+                for (var i = 0; i < $data.find('tr').length - 1; i++) {
+                    var item = $data.find('tr').eq(i + 1).find('td').eq(num + 1).find('[type=text]').val();
+                    data_y.push(item);
+                }
+                option2.series[0].name = name;
+                option2.series[0].data = data_y;
+                chartById('tendencyChart', option2, 1);
+            });
+            var inputChange = function () {
+                var parent = $(this).parent('td');
+                var num = parent.index();
+                var name = $data.find('tr').eq(0).find('td').eq(num).text();
+                var data_y = [];
+                for (var i = 0; i < $data.find('tr').length - 1; i++) {
+                    var item = $data.find('tr').eq(i + 1).find('td').eq(num).find('[type=text]').val();
+                    data_y.push(item);
+                }
+                option2.series[0].name = name;
+                option2.series[0].data = data_y;
+                $('#four ul li').eq(num - 1).addClass('active').siblings().removeClass('active');
+                chartById('tendencyChart', option2, 1);
+            }
+            $('#three table tr td input').bind('focus keyup', inputChange);
+            $('#bottom-button button').click(function () {
+                var increaseFactor = [];
+                var factorName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'm', 'n', 'x', 'y', 'z'];
+                var allTr = $('#forccastFactor tr').not(':first');
+                //console.log(allTr);
+                for (var i = 0; i < allTr.length; i++) {
+                    var trInput = $(allTr[i]).find('input');
+                    var object = {};
+                    for (var j = 0; j < trInput.length; j++) {
+                        object[factorName[j]] = $(trInput[j]).val();
+                        //console.log($(trInput[j]).val());
+                    }
+                    increaseFactor.push(object);
+                }
+                // console.log(increaseFactor)
+                // localStorage.setItem('forccastFactor', JSON.stringify(increaseFactor));
+            });
+        });
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent" id="shiying">
+        <div class="kea_menu">
+            <ul>
+                <li class="menu_active">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid" style="padding-top: 0px;padding-bottom: 2px;">
+                        <form action="" method="post" class="form-horizontal">
+                            <div class="" id="first">
+                                <p>Model Checkedist</p>
+                                <div class="container-fluid" id="content">
+                                    <table class="table">
+                                        <tr>
+                                            <td>choose</td>
+                                            <td>Event Type</td>
+                                            <td>Sub Event Type</td>
+                                            <td>Region</td>
+                                            <td>Country</td>
+                                            <td>Operator</td>
+                                            <td>Cluster Name</td>
+                                            <td>Wireless Level</td>
+                                            <td>Occur Date</td>
+                                            <td>Busy Time</td>
+                                            <td>Project Name</td>
+                                            <td>Traffic Period</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="second">
+                                <p>Operator Information</p>
+                                <ul class="clearfix">
+                                    <li>
+                                        <select class="operator-select" value="RF_TCP">
+                                            <option>RF_TCP</option>
+                                            <option>RF_TCP1</option>
+                                            <option>RF_TCP2</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select class="operator-select" value="Call HSDPA UE">
+                                            <option>Call HSDPA UE</option>
+                                            <option>Call HSDPA UE1</option>
+                                            <option>Call HSDPA UE2</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                                <div style="height: 140px;" id="operatorChart">
+
+                                </div>
+                            </div>
+                            <div id="three">
+                                <p>Forecast Factor</p>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-3 form-group">
+                                            <label class="control-label col-lg-6">DCH Percentage Ration:</label>
+                                            <div class="col-lg-6">
+                                                <input type="text" name="dch" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label class="control-label col-lg-6">Project Ration:</label>
+                                            <div class="col-lg-6">
+                                                <input type="text" name="projectRation" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label class="control-label col-lg-6">Host Ration:</label>
+                                            <div class="col-lg-6">
+                                                <input type="text" name="hostRation" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3" style="padding: 0;">
+                                            <div class="col-lg-6" style="padding: 0;">
+                                                <label class="control-label">Hotspot Region Num of People:</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" name="hotspotPeople" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="scroll" style="height: 160px;margin-right: -15px;">
+                                        <table class="table" id="forccastFactor">
+                                            <tr>
+                                                <td>Time</td>
+                                                <td>AMR User Factor</td>
+                                                <td>PS R99 DL User Factor</td>
+                                                <td>PS R99 UL User Factor</td>
+                                                <td>HSDPA User Factor</td>
+                                                <td>RRC User Factor</td>
+                                                <td>Traffic AMR Factor</td>
+                                                <td>Traffic PS R99 DL User Factor</td>
+                                                <td>Traffic PS R99 UL User Factor</td>
+                                                <td>Traffic HSOPA Factor</td>
+                                                <td>Traffic HSUPA Factor</td>
+                                                <td>Traffic RRC Factor</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="four">
+                                <p>The Chart Shawing Increaso Tendency</p>
+                                <ul class="clearfix chart-list">
+                                    <li class="active">AMR User Factor</li>
+                                    <li>PS R99 DL User Factor</li>
+                                    <li>PS R99 UL User Factor</li>
+                                    <li>HSDPA User Factor</li>
+                                    <li>RRC User Factor</li>
+                                    <li>Traffic AMR Factor</li>
+                                    <li>Traffic PS R99 DL User Factor</li>
+                                    <li>Traffic PS R99 UL User Factor</li>
+                                    <li>Traffic HSOPA Factor</li>
+                                    <li>Traffic HSUPA Factor</li>
+                                    <li>Traffic RRC Factor</li>
+                                </ul>
+                                <div class="scroll" style="height: auto;">
+                                    <div id="tendencyChart" style="height: 155px;width: 2000px;"></div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="page_5.html" class="href">
+                <button class="btn btn-primary">Back</button>
+            </a>
+            <a class="href">
+                <button class="btn btn-primary" onclick="dataToGTimeDetail('page_5.html', 'p6data')">Submit</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <title>page_5</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/3g-1.css">
+    <!--<link rel="stylesheet" href="dong.css">-->
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <script src="./static/js/moment-with-locales.min.js"></script>
+    <link href="./static/style/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./static/style/animation.css">
+    <script src="./static/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="./static/js/layer-message.js"></script>
+    <style type="text/css">
+        .animation {
+            background: url("./static/img/3g-2.png") no-repeat 50% 50%;
+            background-size: cover;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: "YYYY-MM-DD",
+
+            });
+            $('#datetimepicker2').datetimepicker({
+                useCurrent: false,
+                format: "YYYY-MM-DD",
+            });
+            $("#datetimepicker1").on("dp.change", function (e) {
+                $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                var date1 = $("#datetimepicker1 input").val();
+                $('#content table tr').eq(1).find('td').eq(1).text(date1);
+                $('#g-time-detail table tr th').text(date1);
+            });
+            $("#datetimepicker2").on("dp.change", function (e) {
+                $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                var date2 = $("#datetimepicker2 input").val();
+                $('#content table tr').eq(2).find('td').eq(1).text(date2);
+            });
+            $('#datetimepicker').datetimepicker({
+                inline: true,
+                dayViewHeaderFormat: 'YYYY-MM',
+                format: "YYYY-MM-DD",
+            });
+
+            getData();
+            var gtime = JSON.parse(localStorage.getItem('gtime'));
+            if (gtime != null) {
+                if (gtime['date1'] && gtime['date1'] != '') {
+                    date = gtime['date1'];
+                    $("#datetimepicker1 input").val(date);
+                    $('#g-time-detail table tr th').text(date);
+                    tableAdd(date,'page_6.html');
+                    var inputVal = gtime['gtime'];
+                    var input = $('#content table tr').eq(1).find('input');
+                    for (var i = 0; i < input.length; i++) {
+                        $(input[i]).val(inputVal[i]);
+                    }
+                    // addStar($("#datetimepicker1 input"));
+                }
+                if (gtime['date2'] && gtime['date2'] != '') {
+                    date = gtime['date2'];
+                    $("#datetimepicker2 input").val(date);
+                    tableAdd(date,'page_6.html');
+                    var inputVal = gtime['gtime'];
+                    var input = $('#content table tr').eq(2).find('input');
+                    for (var i = 0; i < input.length; i++) {
+                        $(input[i]).val(inputVal[i + 4]);
+                    }
+                    // addStar($("#datetimepicker2 input"));
+                }
+            }
+
+            //设置默认值
+            if ($("#datetimepicker1 input").val() == '') {
+                var date = getTime(1);
+                $("#datetimepicker1 input").val(date);
+                $('#g-time-detail table tr th').text(date);
+                tableAdd(date,'page_6.html');
+            }
+            if ($("#datetimepicker2 input").val() == '') {
+                var date = getTime(1);
+                $("#datetimepicker2 input").val(date);
+                tableAdd(date,'page_6.html');
+            }
+            $('#content table a.config').click(function () {
+                saveTime();
+                //传值到p6
+                var curdata = $(this).parent().parent().children("td");
+                var date = curdata[1].innerText;
+                var input = $(this).parent().find('input');
+                var time = [];
+                for (var i = 0; i < input.length; i++) {
+                    time.push($(input[i]).val());
+                }
+                var starttime = time[0] + ":" + time[1], endtime = time[2] + ":" + time[3];
+                var p6data = {date: date, starttime: starttime, endtime: endtime};
+                localStorage.setItem('p6data', JSON.stringify(p6data));
+            });
+            $('#bottom-button button').click(saveTime());
+            var page7 = JSON.parse(localStorage.getItem('page7'));
+            if (page7 == null) {
+                page7 = [];
+            };
+            $('#bottom-button button').click(function () {
+                var value = $('select[attr=hotspotRegion]').val();
+                console.log('thisway');
+                var time = getTime();
+                var task = {
+                    hotspotRegion: value,
+                    createTime: time,
+                };
+                page7.push(task);
+                localStorage.setItem('page7', JSON.stringify(page7));
+            });
+
+            //标记日历，选择事件
+            addStar();
+            activeDayShow();
+
+            $('#datetimepicker td').click(function () {
+                activeDayShow();
+                addStar();
+            });
+
+            $('input.GTime').blur(function () {
+                if (this.value.length === 1) {
+                    $(this).val('0'+this.value);
+                }
+                else if (this.value.length === 0) {
+                    $(this).val('00');
+                }
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent" id="shiying">
+        <div class="kea_menu">
+            <ul>
+                <li class="menu_active">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress">
+                <div class="kea_progress_bg" style="padding-top: 10px;">
+                    <div class="container-fluid">
+                        <div class="container-fluid" style="padding-bottom: 10px;">
+                            <div class="animation">
+                                <div class="flex1 flex">
+                                    <!--左起第一列-->
+                                    <div class="flex1_2 flex Rotation">
+                                        <div class="flex1_3 flex Rotation_a">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex2 flex">
+                                    <!--左起第二列  上下各一个-->
+                                    <div class="flex1_2 flex Rotation small-animation">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="first" style="padding-bottom: 25px">
+                                <p>Cluster Configuration</p>
+                                <form action="" method="post" class="form-horizontal">
+                                    <div class="container-fluid">
+                                        <div class="row row-margin-top">
+                                            <div class="col-lg-4 form-group">
+                                                <label class="control-label col-lg-4">Hotspot Region
+                                                    Name:</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control" attr="hotspotRegion">
+                                                        <option value="Manacana Stadium">Manacana Stadium
+                                                        </option>
+                                                        <option value="Stadium/Manacana Outdoor">Manacana Outdoor
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 form-group">
+                                                <label class="control-label col-lg-4">Traffic Period:</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control" name="trafficPeriod">
+                                                        <option value="5 minutes">5 minutes</option>
+                                                        <option value="15 minutes">15 minutes</option>
+                                                        <option value="30 minutes">30 minutes</option>
+                                                        <option value="30 minutes">60 minutes</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 form-group form-inline">
+                                                <label class="control-label col-lg-3"
+                                                       style="padding-left: 0px">Date Time:</label>
+                                                <div class="col-lg-9" style="padding-left: 0px">
+                                                    <div class='col-lg-5'>
+                                                        <div class="form-group">
+                                                            <div class='input-group date' id='datetimepicker1'>
+                                                                <input type='text' class="form-control"
+                                                                       autocomplete="off">
+                                                                <span class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="col-lg-1" style="padding:5px 0px 0px 18px">-</span>
+                                                    <div class='col-lg-5'>
+                                                        <div class="form-group">
+                                                            <div class='input-group date' id='datetimepicker2'>
+                                                                <input type='text' class="form-control"
+                                                                       autocomplete="off">
+                                                                <span class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                    </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="dt_input1" value="">
+                                                <input type="hidden" name="dt_input2" value="">
+                                            </div>
+                                        </div>
+                                        <div class="row-margin-top gday-box">
+                                            <div class="col-lg-1 control-label" style="width:166.44px;">
+                                                <label class="">Guarantee Time:</label>
+                                            </div>
+                                            <div class="col-lg-11" style="padding-right:60px">
+                                                <div id="content" style="">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th style="padding-left: 5px !important">Add</th>
+                                                            <th>｜Date</th>
+                                                            <th>｜Guarantee Time</th>
+                                                            <th style="text-align: right">
+                                                                <button type="button" class="add-button" onclick="">+
+                                                                </button>
+                                                            </th>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div id="calendar-show" style="height:200px;position:relative">
+                                                    <div class="calen-div-bg calen-show-style">
+                                                        <div class="date_bg">
+                                                            <div id="datetimepicker"></div>
+                                                            <br>
+                                                        </div>
+                                                        <div style="padding-left: 50px;color: #fff;text-align: left; margin-top: -10px">
+                                                            <img src="./static/img/guarantee_date.png" alt=""
+                                                                 style="margin-right: 10px">
+                                                            <label>Guarantee date</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-9 calen-div-bg"
+                                                         style="position:absolute; right:0; text-align:center;">
+                                                        <label style="padding-top: 5px;color: #00ACFF;">Guarantee Time
+                                                            Details</label>
+                                                        <div id="g-time-detail">
+                                                            <table class="table g-time-detail-table">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th>
+                                                                        2015-11-04
+                                                                    </th>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <label class="g-time-number-l">Guarantee
+                                                                Time Number: <span id="g-tim-num">0</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="page_4.html">
+                <button class="btn btn-primary">Back</button>
+            </a>
+            <a class="href">
+                <button class="btn btn-primary" onclick="alertMsg(clustmsg, 'page_7.html')">Next</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+</body>
+
+</html>

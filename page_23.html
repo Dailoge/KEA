@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_23</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/echarts.common.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <style type="text/css">
+        #content tr:nth-child(1) {
+            background: #de9200;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #content tr:last-child td {
+            border-bottom: 1px solid #de9200 !important;
+        }
+
+        td {
+            padding: 40px 20px !important;
+            text-align: left !important;
+        }
+
+        table {
+            border: none !important;
+            margin-bottom: 0px !important;
+        }
+
+        td a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        th {
+            border-top: none !important;
+            text-align: left;
+            font-weight: 600;
+            padding: 3px !important;
+            vertical-align: middle !important;
+        }
+
+        input[type="radio"] {
+            margin-left: 10px;
+        }
+
+        .table-container div.table-inform {
+            height: 80px
+        }
+    </style>
+    <style type="text/css">
+        #second {
+            border-color: #de9200;
+        }
+
+        #bottom-button button {
+            width: 200px;
+        }
+
+        #second {
+            border-color: #de9200;
+        }
+
+        #second p {
+            background: #de9200;
+        }
+
+        .form-horizontal .control-label {
+            padding-top: 0px !important;
+        }
+
+        #second ul li {
+            float: left;
+            list-style: none;
+            width: 150px;
+        }
+
+        #second ul li:first-child {
+            border-right: 1px solid #fff;
+        }
+
+        .contain {
+            border: 2px solid #3b3e4b;
+            height: 340px;
+            overflow: auto;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var $p = $('.table-container div.table-inform p');
+            var data = [];
+            var object = [
+                {
+                    choose: '<input type="radio">',
+                    eventType: 'Exhibition Meeting Events Category',
+                    subEventType: 'Others',
+                    region: 'China Region',
+                    country: 'China',
+                    operator: 'China Unicom',
+                    clusterName: 'OlympicStadium',
+                    wirelessLevel: 'UMTS',
+                    occurData: '20151011-20151111',
+                    projectName: '2016 test football',
+                    trafficPeriod: '30minutes',
+                    modelDownload: '<a href="javascript:;">Download</a>'
+                },
+                {
+                    choose: '<input type="radio">',
+                    eventType: 'Sports Category',
+                    subEventType: 'Football',
+                    region: 'Middle East Region',
+                    country: 'United Arab Emirates',
+                    operator: 'DU',
+                    clusterName: 'Burj',
+                    wirelessLevel: 'UMTS',
+                    occurData: '20151226-20160102',
+                    projectName: '2016 new year UAEdu',
+                    trafficPeriod: '30minutes',
+                    modelDownload: '<a href="javascript:;">Download</a>'
+                },
+                {
+                    choose: '<input type="radio">',
+                    eventType: 'Festival Category',
+                    subEventType: 'National Category',
+                    region: 'Middle East Region',
+                    country: 'United Arab Emirates',
+                    operator: 'DU',
+                    clusterName: 'Burj',
+                    wirelessLevel: 'UMTS',
+                    occurData: '20160726-20160805',
+                    projectName: '2016 Olympic Open Ceremony',
+                    trafficPeriod: '30minutes',
+                    modelDownload: '<a href="javascript:;">Download</a>'
+                },
+                {
+                    choose: '<input type="radio">',
+                    eventType: 'Exhibition Meeting Events Category',
+                    subEventType: 'Others',
+                    region: 'Southern South America Region',
+                    country: 'Brazil',
+                    operator: 'Telefonica',
+                    clusterName: 'Manacana Outdoor',
+                    wirelessLevel: 'UMTS',
+                    occurData: '20160726-20160805',
+                    projectName: '2016 new year UAE du',
+                    trafficPeriod: '30minutes',
+                    modelDownload: '<a href="javascript:;">Download</a>'
+                },
+            ];
+            for (var i = 0; i < 38; i++) {
+                data.push(object[i % 4]);
+            }
+            var length = data.length;
+            var sumPage = Math.ceil(length / 5);
+            var $setPage = $p.find('span.two');
+            window.j = 1;
+
+            function a() {
+                function b(curPage, action) {
+                    var residue = length - window.j + 1;
+                    var previous = 0;
+                    var num = 0;
+                    this.getD = function (num, action) {
+                        var trFirst = $('#content table tr').eq(0);
+                        $('#content table').html('');
+                        $('#content table').append(trFirst);
+                        for (var i = 0; i < num; i++) {//num代表取多少条数据
+                            var tr = document.createElement('tr');
+                            //var id = document.createElement('td');
+                            //id.innerHTML = window.j;
+                            //tr.appendChild(id);
+                            for (var n in data[window.j - 1]) {
+                                var td = document.createElement('td');
+                                td.innerHTML = data[window.j - 1][n];
+                                tr.appendChild(td);
+                            }
+                            window.j++;
+                            $('#content table').append(tr);
+                            $('input[type=radio]').change(function () {
+                                $('input[type=radio]').prop('checked', false);
+                                $(this).prop('checked', true);
+                            });
+                        }
+                    }
+                    if (action == 'Next') {
+                        if (curPage < sumPage - 1) {
+                            num = 5;
+                            this.getD(num, "Next");
+                            $setPage.text(curPage + 1);
+                        } else if (curPage == sumPage - 1) {
+                            num = length - (sumPage - 1) * 5;
+                            window.j = (sumPage - 1) * 5 + 1;
+                            this.getD(num, 'Next');
+                            $setPage.text(sumPage);
+                        }
+                        else {
+                            alert("It's the last page!");
+                            return;
+                        }
+                    } else if (action == 'Previous') {
+                        if (curPage > 1) {
+                            if (curPage == sumPage) {
+                                if (length % 5 != 0) {
+                                    window.j = window.j - 5 - (window.j % 5) + 1;
+                                } else {
+                                    window.j = window.j - 10;
+                                }
+                            } else {
+                                window.j = window.j - 10;
+                            }
+                            num = 5;
+                            this.getD(num, "Previous");
+                            $setPage.text(curPage - 1);
+                        } else {
+                            alert("It's already the first page!");
+                            return;
+                        }
+                    } else if (action == 'First') {
+                        window.j = 1;
+                        this.getD(5, 'Next');
+                        $setPage.text(1);
+                    } else if (action == 'Last') {
+                        num = length - (sumPage - 1) * 5;
+                        window.j = (sumPage - 1) * 5 + 1;
+                        this.getD(num, 'Next');
+                        $setPage.text(sumPage);
+                    }
+                }
+
+                return b;
+            }
+
+            var getData = a();
+            getData(1, 'First');
+            var num = Math.ceil(length / 5);
+            $p.find('span.one').text(length);
+            $p.find('span.two').text(1);
+            $p.find('span.three').text(num);
+            shiying();
+            $('.table-container div ul li').click(function () {
+                var currentPage = parseInt($p.find('span.two').text());
+                var text = $(this).text();
+                if (text == 'First') {
+                    getData(currentPage, 'First');
+                } else if (text == 'Next') {
+                    getData(currentPage, 'Next');
+                } else if (text == 'Previous') {
+                    getData(currentPage, 'Previous');
+                } else {
+                    getData(currentPage, 'Last');
+                }
+            });
+            /*
+            $('input[type=radio]').change(function(){
+                $('input[type=radio]').prop('checked',false);
+                $(this).prop('checked',true);
+            });
+            */
+
+        });
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent" id="shiying">
+        <div class="kea_menu">
+            <ul>
+                <li onclick="window.location.href='page_4.html'">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li class="menu_active">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main scroll">
+            <div class="kea_progress scroll" style="padding: 10px 15px;">
+                <div class="kea_progress_bg scroll">
+                    <div class="container-fluid scroll" id="content">
+                        <button class="btn btn-primary" style="margin-top: 0px;margin-bottom: 8px;">Filter in History
+                            Traffic Model
+                        </button>
+                        <div class="table-container" style="height: 775px;">
+                            <table class="table" id="thetable">
+                                <tr>
+                                    <th style="text-align:center">Choose</th>
+                                    <th width="100px">｜Event Type</th>
+                                    <th>｜Sub Event Type</th>
+                                    <th width="100px">｜Region</th>
+                                    <th width="100px">｜Country</th>
+                                    <th>｜Operator</th>
+                                    <th>｜Cluster Name</th>
+                                    <th>｜Wireless Level</th>
+                                    <th width="100px">｜Occur Date</th>
+                                    <th width="140px">｜Project Name</th>
+                                    <th>｜Traffic Period</th>
+                                    <th>｜Model Download</th>
+                                </tr>
+                            </table>
+                            <div class="table-inform clearfix" style="background-color: transparent; !important;">
+                                <p>All <span class="one"></span> Nums The <span class="two"></span> Page/All <span
+                                        class="three"></span> Pages</p>
+                                <ul>
+                                    <li>First</li>
+                                    <li>Previous</li>
+                                    <li>Next</li>
+                                    <li>Last</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--<div id="second" style=" overflow: auto">-->
+                            <!--<p>The Chart Showing Increase Factor Tendency</p>-->
+                            <!--<ul class="clearfix">-->
+                                <!--<li>-->
+                                    <!--<select class="operator-select" value="RF_TCP">-->
+                                        <!--<option>RF_TCP</option>-->
+                                        <!--<option>RF_TCP1</option>-->
+                                        <!--<option>RF_TCP2</option>-->
+                                    <!--</select>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<select class="operator-select" value="Call HSDPA UE">-->
+                                        <!--<option>CS AMR UE</option>-->
+                                        <!--<option>CS AMR UE1</option>-->
+                                        <!--<option>CS AMR UE2</option>-->
+                                    <!--</select>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--<div class="scroll">-->
+                                <!--<div style="height: 400px;width: 2500px" id="operatorChart"></div>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="javascript:;">
+                <button class="btn btn-primary" style="width: 150px;">Privilege Apply</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+<script type="text/javascript">
+    var option1 = {
+        legend: {
+            show: false,
+            data: ['RF_TCP', 'CS AMR UE'],
+        },
+        xAxis: [
+            {
+                data: getTimeArr(0, 24, 30)
+            }
+        ],
+        series: [
+            {
+                name: 'RF_TCP',
+                data: []
+            },
+            {
+                name: 'CS AMR UE',
+                data: []
+            },
+        ]
+    };
+    var x_data = [200, 320, 500, 440, 600, 200, 300, 500, 600, 900, 500, 300, 500, 600, 800, 500, 200, 500, 300, 400];
+    var x_data1 = [200, 120, 110, 340, 200, 330, 300, 500, 600, 800, 500, 300, 500, 600, 800, 500, 200, 500, 500, 623];
+    for (var i = 0; i < 49; i++) {
+        x_data[i] = Math.random() * 900;
+    }
+    for (var i = 0; i < 49; i++) {
+        x_data1[i] = Math.random() * 900;
+    }
+    option1.series[0].data = x_data;
+    option1.series[1].data = x_data1;
+    chartById('operatorChart', option1);
+    $('#second ul li select').change(function () {
+        var value = $(this).val();
+        for (var i = 0; i < 49; i++) {
+            x_data[i] = Math.random() * 900;
+        }
+        for (var i = 0; i < 49; i++) {
+            x_data1[i] = Math.random() * 900;
+        }
+        option1.series[0].data = x_data;
+        option1.series[1].data = x_data1;
+        chartById('operatorChart', option1)
+    });
+
+    var tablecol = [60, 90, 120, 80, 100, 100, 100, 100, 100, 120, 100, 120];
+    var table = document.getElementById("thetable");
+    tablecol.forEach(function (item) {
+        var col = document.createElement("col");
+        col.width = item;
+        table.appendChild(col);
+        console.log(col)
+
+    });
+    console.log(table);
+</script>
+</body>
+</html>

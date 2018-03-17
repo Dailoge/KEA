@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_2</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" href="./static/style/login.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .input-group .input-group-addon {
+            background: transparent;
+            border: 0px;
+            color: #fff;
+        }
+        .input-group-addon {
+            padding: 6px 8px;
+        }
+        .form-group {
+            margin-bottom: 0px;
+            background: transparent;
+            border: 0px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <section class="kea_body">
+        <section class="kea_body_top">
+             <div>
+                <img src="./static/img/kea_logo.png"/>
+                <img src="./static/img/kea_name.png"/>
+             </div>
+        </section>
+        <section class="kea_body_coentent_login">
+            <div class="key_body_content_right">
+                <div id="login_frame">
+                    <div id="login_logo">
+                        <img src="./static/img/login_wireless.png" alt="">
+                    </div>
+                    <div class="form_signin">
+                        <div class="form-group input-group input_wrapper">
+                            <span class="input-group-addon username">China Domain Account:</span>
+                            <input type="text" name="usr" id="username" placeholder="Account" required autofocus oninvalid="setCustomValidity('Please input account')">
+                        </div>
+                        <div class="form-group input-group input_wrapper pwd_wrapper">
+                            <span class="input-group-addon username">China Domain Password:</span>
+                            <input type="password" name="pwd" id="password" placeholder="Password" required oninvalid="setCustomValidity('Please input password')">
+                        </div>
+                        <div class="form-group input-group">
+                            <div class="input-group input_wrapper code_wrapper">
+                                <span class="input-group-addon idcode">Identifying Code:</span>
+                                <input type="text" name="code" class=""id="idcode" placeholder="Code" maxlength="4" required oninvalid="setCustomValidity('Please input code')">
+                            </div>
+                            <span class="input-group-addon"> <img src="./static/img/captcha.png" onclick="" id="safeCode"  style="cursor:pointer">  
+                            </span>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input id="savepwd" type="checkbox" value="savepwd">Save Password
+                            </label>
+                            <a href="">Forget Password</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                    </div>
+                </div>
+                <div id="intro">
+                    <h3>Key Event Network Assurance</h3>
+                    <p>Key Event Network Assurance Support Platform,<br>
+                    supporting global traffic model inquiry, new event traffic<br>
+                    forecast and capability audit.</p>
+                </div>
+            </div>
+        </section>
+        <section class="kea_body_bottom">
+            <a href="page_3.html">
+                <img src="./static/img/kea_bottom.png"/>
+            </a>
+        </section>
+    </section>
+    <script type="text/javascript">
+        window.onload = function () {
+            localStorage.clear();
+        };
+        $("button").click(function(){
+            localStorage.setItem('username', document.getElementById('username').value);
+            window.location.href = "page_3.html";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+.kea_body_coentent_login{
+    color: white;
+    background: url('./../img/login_bg.png');
+    height: 100%;
+    width: 1706px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.key_body_content_right {
+    float: right;
+}
+#login_frame {
+    border: 20px solid transparent;
+    width: 425px;
+    height: 380px;
+    padding: 5px;
+    margin-top: 150px;
+    margin-right: 30px;
+}
+#login_frame {
+    -moz-border-image:url('./../img/login_UI.png') 30 30 stretch;	/* Old Firefox */
+    -webkit-border-image:url('./../img/login_UI.png') 30 30 stretch;	/* Safari and Chrome */
+    -o-border-image:url('./../img/login_UI.png') 30 30 stretch;		/* Opera */
+    border-image:url('./../img/login_UI.png') 30 30 stretch;
+}
+#login_frame h3 {
+    margin-top: 75px;
+    text-align: center;
+}
+#login_logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.login_select ul{
+    text-align: center;
+}
+.login_select li {
+    list-style-type:none;
+    float: left; 
+    margin-top: 20px;
+    margin-left: 9px;
+    margin-right: 9px;
+}
+#intro {
+    margin-right: 30px;
+    padding: 20px;
+}
+.form_signin {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+label {
+    font-weight: normal;
+    font-size: 15px;
+}
+span.username {
+    width: 180px;
+    text-align: right;
+}
+span.password {
+    width: 180px;
+    text-align: right;
+}
+span.idcode {
+    width: 130px;
+    text-align: right;
+}
+.input_wrapper {
+    border: 2px solid #3A82BA !important;
+    padding: 8px 15px 8px 0px !important;
+    width: 330px;
+}
+.pwd_wrapper {
+    border-top: none !important;
+}
+.code_wrapper {
+    border-top: none !important;
+    width: 220px;
+}
+input#username {
+    width: 100px;
+    padding: 6px;
+}
+input#password {
+    width: 100px;
+    padding: 6px;
+}
+input#idcode {
+    width: 40px;
+    padding: 6px 0px;
+}
+.captcha {
+    width: 100px;
+    height: 48px;
+    padding: 5px;
+    background-color: #fff;
+    margin-right: 5px;
+}
+.form_signin input {
+    background: transparent;
+    border: 0px;
+    outline:none;
+    margin-left: 15px;
+}
+.checkbox {
+    margin-top: 5px;
+}
+.checkbox a {
+    float: right;
+}
+.checkbox .savepwd {
+    width: 120px;
+}

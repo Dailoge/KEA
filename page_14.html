@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_14</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <link rel="stylesheet" href="./static/style/animation.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <style type="text/css">
+        .bg{
+            height: 348px;
+        }
+        .bg img{
+            width: 100%;
+            height: 100%;
+        }
+        #first p,#second p{
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-bottom: 20px;
+        }
+        #first input,#first select{
+            margin-bottom: 20px;
+        }
+        .animation {
+            background: url(./static/img/4g-1.png) no-repeat 50% 50%;
+            background-size: cover;
+        }
+        #second {
+            padding-bottom: 40px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function(){
+            $('a.file').on('change',"input[type='file']",function(){
+                var id=$(this).attr('id');
+                if(id=='file1'){
+                    $('#inputFile1').val($(this).val());
+                }else if(id=='file2'){
+                    $('#inputFile2').val($(this).val());
+                }
+            });
+            getData();
+        });
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section  class="kea_body_coentent" id="shiying">
+        <div class="kea_menu">
+            <ul>
+                <li  class="menu_active">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" onclick="window.location.href='page_10.html'">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress">
+                <div class="kea_progress_bg">
+                        <div class="container-fluid">
+                            <div class="animation">
+                                <div class="flex1 flex" onclick="window.location.href='page_4.html'">
+                                    <!--左起第一列-->
+                                    <div class="flex1_2 flex Rotation">
+                                        <div class="flex1_3 flex Rotation_a">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="first">
+                                <p>Current Operation Information</p>
+                                <form action="" method="post" class="form-horizontal">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-lg-4 form-group">
+                                                <label class="control-label col-lg-4" for="">Region:</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control" name="region">
+                                                        <option>Americe Rep Office</option>
+                                                        <option>Americe Rep Office2</option>
+                                                        <option>Americe Rep Office3</option>
+                                                    </select>
+                                                </div>
+                                                <label class="control-label col-lg-4" for="">Wireless Level:</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control" name="wirelessLevel">
+                                                        <option>LTE</option>
+                                                        <option>UMTS</option>
+                                                    </select>
+                                                </div>
+                                                <label class="control-label col-lg-4" for="">2G Penetration:</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="2G" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 form-group">
+                                                <label class="control-label col-lg-4" for="">Country:</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control" name="country">
+                                                        <option>United States</option>
+                                                        <option>United States2</option>
+                                                        <option>United States3</option>
+                                                    </select>
+                                                </div>
+                                                <label class="control-label col-lg-4" for="">Market Share Ratio:</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="Marketsr" class="form-control">
+                                                </div>
+                                                <label class="control-label col-lg-4" for="">3G Penetration:</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="3G" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 form-group">
+                                                <label class="control-label col-lg-4" for="">Operator:</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control" name="operator">
+                                                        <option>AM(American Movil)</option>
+                                                        <option>AM(American Movil)2</option>
+                                                        <option>AM(American Movil)3</option>
+                                                    </select>
+                                                </div>
+                                                <label class="control-label col-lg-4" for="">Project Name:</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="projectName" class="form-control">
+                                                </div>
+                                                <label class="control-label col-lg-4" for="">4G Penetration:</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="4G" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="second">
+                                <p>Current Network Information</p>
+                                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2" for="inputFile1">KEA File:</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="file1" class="form-control" id="inputFile1">
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <a href="javascript:;" class="file"><input type="file" name="file11" id="file1">. . .</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2" for="inputFile1">Authority File:</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="file2" class="form-control" id="inputFile2">
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <a href="javascript:;" class="file"><input type="file" name="file22" id="file2" accept="text/plain,application/pdf">. . .</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="page_15.html">
+                <button class="btn btn-primary">Next</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+<script src="static/js/regions.js"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page_10</title>
+    <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/style/main.css">
+    <link rel="stylesheet" type="text/css" href="./static/style/dong.css">
+    <script src="./static/js/jquery.min-1.11.js"></script>
+    <script src="./static/layer/layer.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/dong.js"></script>
+    <style type="text/css">
+        #content tr:nth-child(1) {
+            background: #de9200;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #content tr:last-child td {
+            border-bottom: 1px solid #de9200 !important;
+        }
+        #content tr td:last-child{
+            text-align: left;
+            padding-left: 80px !important;
+            width: 350px;
+        }
+        td {
+            padding-top: 27px !important;
+            padding-bottom: 27px !important;
+        }
+
+        table {
+            border: none !important;
+            margin-bottom: 0px !important;
+        }
+
+        td a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var username=localStorage.getItem('username');
+            var data = [
+                {
+                    ProjectName: 'Olympic Open Ceremony',
+                    TaskType: 'Model Upload',
+                    Status: 'Success',
+                    CreateUser: 't00123456',
+                    CreateTime: '2016-12-11 11:00:'+(parseInt(Math.random()*49)+10),
+                    Operation: '<a href="javascript:;">History Traffic Model</a>'
+                },
+                {
+                    ProjectName: '2016 Olympic Open Ceremony',
+                    TaskType: 'Model Upload',
+                    Status: 'Success',
+                    CreateUser: 't00123456',
+                    CreateTime: '2016-12-10 09:30:'+(parseInt(Math.random()*49)+10),
+                    Operation: '<a href="javascript:;">History Traffic Model</a>'
+                },
+                {
+                    ProjectName: '2017 new year',
+                    TaskType: 'UMTS',
+                    Status: 'Success',
+                    CreateUser: 't00123456',
+                    CreateTime: '2016-12-25 10:20:'+(parseInt(Math.random()*49)+10),
+                    Operation: '<p><a href="page_11.html">Forcast Result</a>　<a href="page_12.html">Audit Result Edit</a></p>'
+                },
+                {
+                    ProjectName: 'Test Sport',
+                    TaskType: 'UMTS',
+                    Status: 'Success',
+                    CreateUser: 't00123456',
+                    CreateTime: '2016-10-11 10:10:'+(parseInt(Math.random()*49)+10),
+                    Operation: '<p><a href="page_11.html">Forcast Result</a>　<a href="page_12.html">Audit Result Edit</a></p>'
+                },
+                {
+                    ProjectName: 'test Burj',
+                    TaskType: 'UMTS',
+                    Status: 'Success',
+                    CreateUser: 't00123456',
+                    CreateTime: '2016-11-11 11:20:'+(parseInt(Math.random()*49)+10),
+                    Operation: '<p><a href="page_11.html">Forcast Result</a>　<a href="page_12.html">Audit Result Edit</a></p>'
+                },
+                {
+                    ProjectName: '2016 year Burj',
+                    TaskType: 'Model Upload',
+                    Status: 'Fail',
+                    CreateUser: 't00123456',
+                    CreateTime: '2016-09-11 15:20:'+(parseInt(Math.random()*49)+10),
+                    Operation: '<a href="javascript:;">History Traffic Model</a>'
+                },
+                {
+                    ProjectName: '2017 year Burj',
+                    TaskType: 'UMTS',
+                    Status: 'Success',
+                    CreateUser: 't00123456',
+                    CreateTime: '2016-12-11 14:20:'+(parseInt(Math.random()*49)+10),
+                    Operation: '<p><a href="page_11.html">Forcast Result</a>　<a href="page_12.html">Audit Result Edit</a></p>'
+                },
+                {
+                    ProjectName: '2017 new  year du',
+                    TaskType: 'Model Upload',
+                    Status: 'Success',
+                    CreateUser: 't00123456',
+                    CreateTime: '2016-12-27 11:20:'+(parseInt(Math.random()*49)+10),
+                    Operation: '<a href="javascript:;">History Traffic Model</a>'
+                },
+            ];
+            for(var i=0;i<154;i++){
+                data.push(data[i%8]);
+            }
+            var page3=JSON.parse(localStorage.getItem('page3'));//获取page3传递过来的数据
+            if(page3==null){
+                page3=[];
+            }else{
+                page3.forEach(function(item,index){
+                    if(item.hasOwnProperty('projectName')){
+                        for(var i in item){
+                            if (item[i]===null)
+                                item[i] = "null";
+                                continue;
+                            item[i]=item[i].replace(/\+/g, " ");
+                        }
+                        if(judgeTime(item['createTime'])){
+                            item['status']='Forecast: Success Audit: Success';
+                            item['operation']='<p><a href="page_11.html">Forcast Result</a>　<a href="page_12.html">Audit Result</a> <a href="">Edit</a></p>';
+                        }else{
+                            item['status']='Forecast: Success Audit:Running';
+                            item['operation']='<a href="javascript:;">Forcast Result</a>';
+                        }
+                        item['projectName']=decodeURIComponent(decodeURIComponent(item['projectName']));
+                        var object = {
+                            ProjectName: item['projectName'],
+                            TaskType: item['taskType']||'Model Upload',
+                            Status: item['status'],
+                            CreateUser: username ||'t00123456',
+                            CreateTime: item['createTime']||'1970-01-01 00:00',
+                            Operation: item['operation']
+                        };
+                        data.unshift(object);
+                    }
+                });
+            }
+            var $p = $('.table-container div.table-inform p');
+            var length = data.length;
+            var sumPage = Math.ceil(length / 10);
+            var $setPage = $p.find('span.two');
+            window.j = 1;
+
+            function a() {
+                function b(curPage, action) {
+                    var residue = length - window.j + 1;
+                    var previous = 0;
+                    var num = 0;
+                    this.getD = function (num, action) {
+                        var trFirst = $('#content table tr').eq(0);
+                        $('#content table').html('');
+                        $('#content table').append(trFirst);
+                        for (var i = 0; i < num; i++) {//num代表取多少条数据
+                            var tr = document.createElement('tr');
+                            var id = document.createElement('td');
+                            id.innerHTML = window.j;
+                            tr.appendChild(id);
+                            for (var n in data[window.j - 1]) {
+                                var td = document.createElement('td');
+                                td.innerHTML = data[window.j - 1][n];
+                                tr.appendChild(td);
+                            }
+                            window.j++;
+                            $('#content table').append(tr);
+                        }
+                    }
+                    if (action == 'Next') {
+                        if (curPage < sumPage - 1) {
+                            num = 10;
+                            this.getD(num, "Next");
+                            $setPage.text(curPage + 1);
+                        } else if (curPage == sumPage - 1) {
+                            num = length - (sumPage - 1) * 10;
+                            window.j = (sumPage - 1) * 10 + 1;
+                            this.getD(num, 'Next');
+                            $setPage.text(sumPage);
+                        }
+                        else {
+                            alert("It's the last page!");
+                            return;
+                        }
+                    } else if (action == 'Previous') {
+                        if (curPage > 1) {
+                            if (curPage == sumPage) {
+                                if (length % 10 != 0) {
+                                    window.j = window.j - 10 - (window.j % 10) + 1;
+                                } else {
+                                    window.j = window.j - 20;
+                                }
+                            } else {
+                                window.j = window.j - 20;
+                            }
+                            num = 10;
+                            this.getD(num, "Previous");
+                            $setPage.text(curPage - 1);
+                        } else {
+                            alert("It's already the first page!");
+                            return;
+                        }
+                    } else if (action == 'First') {
+                        window.j = 1;
+                        if(length>=10){
+                            this.getD(10, 'Next');
+                        }else{
+                            this.getD(length, 'Next');
+                        }
+                        $setPage.text(1);
+                    } else if (action == 'Last') {
+                        num = length - (sumPage - 1) * 10;
+                        window.j = (sumPage - 1) * 10 + 1;
+                        this.getD(num, 'Next');
+                        $setPage.text(sumPage);
+                    }
+                }
+
+                return b;
+            }
+
+            var getData = a();
+            getData(1, 'First');
+            var num = Math.ceil(length / 10);
+            $p.find('span.one').text(length);
+            $p.find('span.two').text(1);
+            $p.find('span.three').text(num);
+            shiying();
+            $('.table-container div ul li').click(function () {
+                var currentPage = parseInt($p.find('span.two').text());
+                var text = $(this).text();
+                if (text == 'First') {
+                    getData(currentPage, 'First');
+                } else if (text == 'Next') {
+                    getData(currentPage, 'Next');
+                } else if (text == 'Previous') {
+                    getData(currentPage, 'Previous');
+                } else {
+                    getData(currentPage, 'Last');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<section class="kea_body">
+    <section class="kea_body_top">
+        <div>
+            <img src="./static/img/kea_logo.png"/>
+            <img src="./static/img/kea_name.png">
+        </div>
+        <div>
+            Logout
+        </div>
+    </section>
+    <section class="kea_body_coentent" id="shiying">
+        <div class="kea_menu">
+            <ul>
+                <li onclick="window.location.href='page_4.html'">Traffic Forecast and Capacity Audit</li>
+                <li onclick="window.location.href='page_3.html'">History Traffic Model Upload</li>
+                <li onclick="window.location.href='page_23.html'">History Traffic Model Inquiry</li>
+                <li style="width:175px" class="menu_active">Task Manage</li>
+                <li onclick="window.location.href='new22.html'">User Account Management</li>
+            </ul>
+        </div>
+        <div class="kea_body_coentent_main">
+            <div class="kea_progress" style="padding: 10px 15px">
+                <div class="kea_progress_bg">
+                    <div class="container-fluid" id="content">
+                        <div class="table-container">
+                            <table class="table">
+                                <tr>
+                                    <td>TasK Index</td>
+                                    <td>ProjectName</td>
+                                    <td>TaskType</td>
+                                    <td>Status</td>
+                                    <td>CreateUser</td>
+                                    <td>CreateTime</td>
+                                    <td>Operation</td>
+                                </tr>
+                            </table>
+                            <div class="table-inform clearfix">
+                                <p>All <span class="one"></span> Nums The <span class="two"></span> Page/All <span
+                                        class="three"></span> Pages</p>
+                                <ul>
+                                    <li>First</li>
+                                    <li>Previous</li>
+                                    <li>Next</li>
+                                    <li>Last</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="bottom-button" class="text-right">
+            <a href="page_14.html">
+                <button class="btn btn-primary">Next</button>
+            </a>
+        </div>
+    </section>
+    <section class="kea_body_bottom">
+        <img src="./static/img/kea_bottom.png"/>
+    </section>
+</section>
+</body>
+</html>
